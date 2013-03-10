@@ -29,6 +29,7 @@ public:
     virtual bool operator>(const Object&) const;
     virtual bool operator>=(const Object&) const;
     virtual bool populate(std::string cmd);
+    // TODO: Add getters and setters and implement them
 protected:
     // Private data members:
     bool isInitialized;

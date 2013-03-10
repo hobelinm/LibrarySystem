@@ -15,6 +15,7 @@
 #define USER_COLLECTION_H
 
 #define USERID_MAX 9999
+#define USERID_MIN 0
 #define USERS {"PATRON", "LIBRARIAN"}
 
 class UserCollection 

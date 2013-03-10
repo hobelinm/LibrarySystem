@@ -12,6 +12,8 @@
 
 #ifndef USER_H
 #define USER_H
+#define CMD_SEPARATOR " "
+#define ALT_SEPARATOR ","
 
 class User : public Object
 {
@@ -28,6 +30,7 @@ public:
     virtual bool operator>=(const Object &obj) const = 0;
     // Pure virtual method to force initialization of the object
     virtual bool populate(std::string) = 0;
+    // TODO: Add setters and getters pure virtual to force implementation
 protected:
     // Protected data members
     std::string type;

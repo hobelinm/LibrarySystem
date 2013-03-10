@@ -252,7 +252,7 @@ bool Library::parseUser(string command)
         return false; }
     int iUserId;
     char leftOver;
-    string sUserId(command.substr(0, command.find_first_of(" ")));
+    string sUserId(command.substr(0, command.find_first_of(CMD_SEPARATOR)));
 
     // Parse user from string
     istringstream strUserId(sUserId);
@@ -264,7 +264,7 @@ bool Library::parseUser(string command)
         return false; }
 
     // Check 0<=integer<9999 as final validation
-    if((iUserId <= 0) || (iUserId > USERID_MAX)) {
+    if((iUserId <= USERID_MIN) || (iUserId > USERID_MAX)) {
         cout << ERROR_3 << endl;
         cout << "--> At User Id <" << iUserId << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;

@@ -142,6 +142,39 @@ bool Patron::operator>=(const Object &obj) const
 bool Patron::populate(string cmd) 
 {
     // TODO: Implement this method
+    userId = cmd.substr(0, cmd.find_first_of(CMD_SEPARATOR));
+    string remaining = cmd.substr(cmd.find_first_of(CMD_SEPARATOR) + 1, 
+        cmd.size() - cmd.find_first_of(CMD_SEPARATOR) - 1);
+    lastName = remaining.substr(0, remaining.find_first_of(CMD_SEPARATOR));
+    remaining  = remaining.substr(remaining.find_first_of(CMD_SEPARATOR) + 1,
+        remaining.size() - remaining.find_first_of(CMD_SEPARATOR) - 1);
+    if(remaining.size() > 0) { // Is first name included?
+        firstName = remaining.substr(0, 
+            remaining.find_first_of(CMD_SEPARATOR)); 
+        remaining  = remaining.substr(
+            remaining.find_first_of(CMD_SEPARATOR) + 1, remaining.size() -
+            remaining.find_first_of(CMD_SEPARATOR) - 1); }
+    if(remaining.size() > 0) { // Space for street?
+        street = remaining.substr(0, remaining.find_first_of(ALT_SEPARATOR));
+        remaining  = remaining.substr(
+            remaining.find_first_of(ALT_SEPARATOR) + 1, remaining.size() -
+            remaining.find_first_of(ALT_SEPARATOR) - 1); }
+    if(remaining.size() > 0) { // Is city included as well?
+        city = remaining.substr(0, remaining.find_first_of(ALT_SEPARATOR));
+        remaining  = remaining.substr(
+            remaining.find_first_of(ALT_SEPARATOR) + 1, remaining.size() -
+            remaining.find_first_of(ALT_SEPARATOR) - 1); }
+    if(remaining.size() > 0) { // Is telephone number included
+        phone = remaining.substr(0, remaining.find_first_of(ALT_SEPARATOR));
+        remaining  = remaining.substr(
+            remaining.find_first_of(ALT_SEPARATOR) + 1, remaining.size() -
+            remaining.find_first_of(ALT_SEPARATOR) - 1); }
+    if(remaining.size() > 0) { // Is email included?
+        email = remaining.substr(0, remaining.find_first_of(ALT_SEPARATOR));
+        remaining  = remaining.substr(
+            remaining.find_first_of(ALT_SEPARATOR) + 1, remaining.size() -
+            remaining.find_first_of(ALT_SEPARATOR) - 1); }
+    isInitialized = true;
     return true;
 }
 
