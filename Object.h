@@ -7,6 +7,11 @@
 * Hugo Belin Melgoza
 ******************************************************************************/
 
+// TODO: Remove when done
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #ifndef OBJECT_H
 #define OBJECT_H
 

@@ -44,7 +44,7 @@ bool LibraryManager::AddBranch(string branchId)
         cout << ERROR_15 << endl;
         cout << "--> At " << MID_9 << endl;
         return false; }
-    return libraries.add(branchId, &libraryObj);
+    return libraries.add(branchId, new Library(branchId));
 }
 
 // *** Parse an ifstream Resource *** //
@@ -185,7 +185,7 @@ bool LibraryManager::parseCommand(string library, string command)
         return false; }
     
     // If library exists, call parseCommand method
-    return libraryObj.parseCommand(command);
+    return lib->parseCommand(command);
 }
 
 // TODO: Implement a hash table for the multiple library systems

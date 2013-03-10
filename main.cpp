@@ -8,10 +8,16 @@
 * Hugo Belin Melgoza
 ******************************************************************************/
 
+// TODO: Remove when done
+#define _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAPALLOC 
+#include <stdlib.h>
+#include <crtdbg.h>
+#include <vld.h>
+
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <vld.h>
 #include "LibraryManager.h"
 
 using namespace std;

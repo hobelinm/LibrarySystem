@@ -39,7 +39,7 @@ public:
     // TODO: Add reset libraries
 private:
     bool isEmptyVar;
-    Library libraryObj; // TODO: DEBUG - Replace with hashTable<Library>
+    //Library libraryObj; // TODO: DEBUG - Replace with hashTable<Library>
     HashTable libraries;
     // TODO: Instanciate further object classes
 };

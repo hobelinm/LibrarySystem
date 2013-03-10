@@ -28,6 +28,7 @@ public:
     Object* operator[](std::string key) const; // Retrieve overload
     Object* remove(std::string key); // Remove item
     int size() const; // Return the number of items in the hash
+    void removeAll(); // Remove all objects in the hash tables
 private:
     struct Node {
         Node *children[TREE_SIZE];
@@ -38,13 +39,17 @@ private:
         Node() {
             for(int i = 0; i < TREE_SIZE; i++) {
                 children[i] = NULL; } }
-        ~Node() { }
+        ~Node() { 
+            for(int i = 0; i < TREE_SIZE && hasChildren; i++) {
+                delete children[i]; }
+        }
     };
 
     Node *root;
     int itemCount;
 
-    // TODO: Destructor methods
+    // Remove helper
+    void removeAllHelper(Node *cursor);
 };
 
 #endif

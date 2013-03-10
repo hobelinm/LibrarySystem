@@ -20,11 +20,9 @@ HashTable::HashTable()
 // *** Default Destructor *** //
 HashTable::~HashTable()
 {
-    if(root != NULL)
-    {
+    if(root != NULL) {
         // TODO: Implement destroy routine
-        //delete root;
-    }
+        removeAll(); }
     // TODO: Destroy any data here
 }
 
@@ -112,6 +110,7 @@ bool HashTable::add(std::string key, Object* value)
     cursor->children[remaining[0]]->key = key;
     cursor->children[remaining[0]]->remaining = 
         remaining.substr(1, remaining.size() - 1);
+    cursor->hasChildren = true;
     return true;
 }
 
@@ -136,7 +135,7 @@ Object* HashTable::retrieve(string key) const
         remainder = remainder.substr(1, remainder.size() - 1); }
     // Three options here:
     // 1 - cursor->key == key, we found the item we were looking for
-    if(cursor->key == key) {
+    if((cursor != NULL) && (cursor->key == key)) {
         return cursor->data; }
     // 2 - remainder.size() == 0, or cursor == NULL, item is not in hash table
     return NULL;
@@ -155,11 +154,14 @@ Object* HashTable::operator[](string key) const
 // *** Remove an item from hash table *** //
 Object* HashTable::remove(string key)
 {
-    // TODO: Implement HashTable.Remove
     if(key == "") {
         cout << ERROR_16 << endl;
         cout << "--> At " << MID_20 << endl;
         return NULL; }
+    // TODO: Implement HashTable.Remove
+    // 1 - Find the location of key
+    //
+    // If it has children
     return NULL;
 }
 
@@ -167,4 +169,29 @@ Object* HashTable::remove(string key)
 int HashTable::size() const 
 {
     return itemCount;
+}
+
+// *** Remove all objects in the hash table *** //
+void HashTable::removeAll()
+{
+    // Perform a simple traverse to remove the elements
+    if(root != NULL) {
+        removeAllHelper(root); }
+}
+
+void HashTable::removeAllHelper(Node *cursor)
+{
+    // Delete cursor's data
+    cursor->data->~Object();
+    delete cursor->data;
+    cursor->key = "";
+    cursor->remaining = "";
+    
+    // Recurse over children
+    for(int i = 0; i < TREE_SIZE && cursor->hasChildren; i++) {
+        if(cursor->children[i] != NULL) {
+            removeAllHelper(cursor->children[i]); } }
+    // At this point we deleted all of its children, so
+    cursor->hasChildren = false;
+    delete cursor;
 }
