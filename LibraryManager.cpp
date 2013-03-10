@@ -188,4 +188,3 @@ bool LibraryManager::parseCommand(string library, string command)
     return lib->parseCommand(command);
 }
 
-// TODO: Implement a hash table for the multiple library systems

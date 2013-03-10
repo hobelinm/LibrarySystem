@@ -11,7 +11,6 @@
 // *** Default Constructor *** //
 HashTable::HashTable()
 {
-    //root = new Node; // TODO: This is until adding a new object
     itemCount = 0;
     root = NULL;
     // TODO: Add any constructor instruction here
@@ -21,7 +20,7 @@ HashTable::HashTable()
 HashTable::~HashTable()
 {
     if(root != NULL) {
-        // TODO: Implement destroy routine
+        // destroy routine
         removeAll(); }
     // TODO: Destroy any data here
 }
@@ -158,10 +157,42 @@ Object* HashTable::remove(string key)
         cout << ERROR_16 << endl;
         cout << "--> At " << MID_20 << endl;
         return NULL; }
-    // TODO: Implement HashTable.Remove
-    // 1 - Find the location of key
-    //
-    // If it has children
+    
+    if(root == NULL) {
+        return NULL; }
+
+    if(root->key == key) { // It's time to remove root
+        Object *item  = root->data;
+        root->data = NULL;
+        root->key = "";
+        root->remaining = "";
+        if(root->hasChildren == false) {
+            delete root; 
+            root = NULL; }
+        return item; }
+
+    if(root->children[key[0]] == NULL) {
+        return NULL; }
+    string remainder = key;
+    Node *cursor = root->children[remainder[0]];
+    while(cursor->children[remainder[0]] != NULL
+        && (cursor->children[remainder[0]]->key != key)
+        && (remainder.size() > 0)) {
+        cursor = cursor->children[remainder[0]];
+        remainder = remainder.substr(1, remainder.size() - 1); }
+    // Three options here:
+    // 1 - cursor->key == key, we found the item we were looking for
+    if((remainder.size() > 0) && (cursor->children[remainder[0]] != NULL) 
+        && (cursor->key == key)) {
+        Object *item = cursor->children[remainder[0]]->data;
+        cursor->children[remainder[0]]->key = "";
+        cursor->children[remainder[0]]->remaining = "";
+        cursor->children[remainder[0]]->data = NULL;
+        if(cursor->children[remainder[0]]->hasChildren == false) {
+            delete cursor->children[remainder[0]];
+            cursor->children[remainder[0]] = NULL; }
+        return cursor->data; }
+    // 2 - remainder.size() == 0, or cursor == NULL, item is not in hash table
     return NULL;
 }
 
@@ -182,10 +213,11 @@ void HashTable::removeAll()
 void HashTable::removeAllHelper(Node *cursor)
 {
     // Delete cursor's data
-    cursor->data->~Object();
-    delete cursor->data;
-    cursor->key = "";
-    cursor->remaining = "";
+    if(cursor->key != "") {
+        cursor->data->~Object();
+        delete cursor->data;
+        cursor->key = "";
+        cursor->remaining = ""; }
     
     // Recurse over children
     for(int i = 0; i < TREE_SIZE && cursor->hasChildren; i++) {
