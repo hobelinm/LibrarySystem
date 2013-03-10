@@ -31,6 +31,8 @@
 #define ERROR_18 "-> ERROR: Value already exists in HashTable"
 #define ERROR_19 "-> ERROR: HashTable is empty"
 #define ERROR_20 "-> ERROR: Selected Library does not exist in hash table"
+#define ERROR_21 "-> ERROR: This object has not been initialized"
+#define ERROR_22 "-> ERROR: Parameter object has not been initialized"
 
 // Fata Errors, errors that should not occur
 #define FATAL_ERROR1 "-> FATAL ERROR: Duplicate key not caught by HashTable::Retrieve"
@@ -58,6 +60,12 @@
 #define MID_19 "Object* HashTable::retrieve(string key) const"
 #define MID_20 "Object* HashTable::remove(string key)"
 #define MID_21 "bool HashTable::add(std::string key, const Object* value)"
+#define MID_22 "bool Patron::operator==(const Object &obj) const"
+#define MID_23 "bool Patron::operator!=(const Object &obj) const"
+#define MID_24 "bool Patron::operator<(const Object &obj) const"
+#define MID_25 "bool Patron::operator<=(const Object &obj) const"
+#define MID_26 "bool Patron::operator>(const Object &obj) const"
+#define MID_27 "bool Patron::operator>=(const Object &obj) const"
 
 // Some notes
 #define NOTE1 "+ 1 accounts for the space following the word"

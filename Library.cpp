@@ -288,8 +288,7 @@ bool Library::parseCommand(ifstream &input)
 {
     bool result = true;
     string command;
-    cout << "* COMMANDS *" << endl;
-
+    
     while(!input.eof()) {
         getline(input, command);
         result = result && parseCommand(command); }
