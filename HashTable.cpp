@@ -227,3 +227,68 @@ void HashTable::removeAllHelper(Node *cursor)
     cursor->hasChildren = false;
     delete cursor;
 }
+
+// *** Implement inherited operations *** //
+bool HashTable::operator==(const Object &obj) const 
+{
+    if(&obj == NULL) {
+        cout << ERROR_14 << endl;
+        cout << "--> At " << MID_36 << endl;
+        return false; }
+    const HashTable &hashTable = static_cast<const HashTable &>(obj);
+    return (this->itemCount == hashTable.itemCount);
+}
+
+bool HashTable::operator!=(const Object &obj) const 
+{
+    if(&obj == NULL) {
+        cout << ERROR_14 << endl;
+        cout << "--> At " << MID_37 << endl;
+        return true; }
+    return !this->operator==(obj);
+}
+
+bool HashTable::operator<(const Object &obj) const 
+{
+    if(&obj == NULL) {
+        cout << ERROR_14 << endl;
+        cout << "--> At " << MID_38 << endl;
+        return false; }
+    const HashTable &hashTable = static_cast<const HashTable &>(obj);
+    return (this->itemCount < hashTable.itemCount);
+}
+
+bool HashTable::operator<=(const Object &obj) const 
+{
+    if(&obj == NULL) {
+        cout << ERROR_14 << endl;
+        cout << "--> At " << MID_39 << endl;
+        return false; }
+    const HashTable &hashTable = static_cast<const HashTable &>(obj);
+    return (this->itemCount <= hashTable.itemCount);
+}
+
+bool HashTable::operator>(const Object &obj) const 
+{
+    if(&obj == NULL) {
+        cout << ERROR_14 << endl;
+        cout << "--> At " << MID_40 << endl;
+        return false; }
+    const HashTable &hashTable = static_cast<const HashTable &>(obj);
+    return (this->itemCount > hashTable.itemCount);
+}
+
+bool HashTable::operator>=(const Object &obj) const 
+{
+    if(&obj == NULL) {
+        cout << ERROR_14 << endl;
+        cout << "--> At " << MID_41 << endl;
+        return false; }
+    const HashTable &hashTable = static_cast<const HashTable &>(obj);
+    return (this->itemCount >= hashTable.itemCount);
+}
+
+Object* HashTable::create() const 
+{
+    return new HashTable;
+}

@@ -7,7 +7,6 @@
 * Hugo Belin Melgoza
 ******************************************************************************/
 
-#include <sstream>
 #include "LibraryManager.h"
 
 using namespace std;

@@ -18,11 +18,20 @@ using namespace std;
 
 #define TREE_SIZE 255
 
-class HashTable 
+class HashTable : public Object
 {
 public:
     HashTable();  // Default constructor
-    ~HashTable(); // Default destructor
+    virtual ~HashTable(); // Default destructor
+    // Inherited comparison methods
+    virtual bool operator==(const Object &obj) const;
+    virtual bool operator!=(const Object &obj) const;
+    virtual bool operator<(const Object &obj) const;
+    virtual bool operator<=(const Object &obj) const;
+    virtual bool operator>(const Object &obj) const;
+    virtual bool operator>=(const Object &obj) const;
+    /* Create a new instance of this object */
+    virtual Object* create() const;
     bool add(std::string key, Object* value); // Add item into the hash
     Object* retrieve(std::string key) const; // Retrieve an item from the hash
     Object* operator[](std::string key) const; // Retrieve overload

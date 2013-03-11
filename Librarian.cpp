@@ -1,145 +1,145 @@
 /******************************************************************************
-* Patron Class <Patron.h>:
-* This class is used to represent library patron's 
+* Librarian Class <Librarian.cpp>:
+* This class is used to represent library librarian's 
 * CSS502 - Assignment 3
 * University of Washington - Winter 2013
 * Hugo Belin Melgoza
 ******************************************************************************/
 
-#include "Patron.h"
+#include "Librarian.h"
 
 using namespace std;
 
-// *** Constructor *** //
-Patron::Patron()
+// *** Constructor *** // 
+Librarian::Librarian()
 {
     isInitialized = false;
-    type      = PATRON_TYPE;
-    firstName = "";
-    lastName  = "";
-    userId    = "";
-    street    = "";
-    city      = "";
-    phone     = "";
-    email     = "";
+    type        = LIBRARIAN_TYPE;
+    firstName   = "";
+    lastName    = "";
+    userId      = "";
+    street      = "";
+    city        = "";
+    phone       = "";
+    email       = "";
 }
 
 // *** Destructor *** //
-Patron::~Patron()
+Librarian::~Librarian()
 {
     // TODO: Implement destructor
 }
 
 // *** Inherited method implementation section *** //
-Object* Patron::create() const 
+Object* Librarian::create() const 
 {
-    return new Patron;
+    return new Librarian;
 }
 
-bool Patron::operator==(const Object &obj) const 
+bool Librarian::operator==(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_22 << endl;
+        cout << "--> At " << MID_28 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_22 << endl;
+        cout << "--> At " << MID_28 << endl;
         return false; }
-    const Patron &patron = static_cast<const Patron &>(obj);
-    if(patron.isInitialized == false) {
+    const Librarian &librarian = static_cast<const Librarian &>(obj);
+    if(librarian.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_22 << endl;
+        cout << "--> At " << MID_28 << endl;
         return false; }
-    return (this->userId.compare(patron.userId) == 0);
+    return (this->userId.compare(librarian.userId) == 0);
 }
 
-bool Patron::operator!=(const Object &obj) const 
+bool Librarian::operator!=(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_23 << endl;
+        cout << "--> At " << MID_29 << endl;
         return true; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_23 << endl;
+        cout << "--> At " << MID_29 << endl;
         return true; }
     return !this->operator==(obj);
 }
 
-bool Patron::operator<(const Object &obj) const 
+bool Librarian::operator<(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_24 << endl;
+        cout << "--> At " << MID_30 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_24 << endl;
+        cout << "--> At " << MID_30 << endl;
         return false; }
-    const Patron &patron = static_cast<const Patron &>(obj);
-    if(patron.isInitialized == false) {
+    const Librarian &librarian = static_cast<const Librarian &>(obj);
+    if(librarian.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_24 << endl;
+        cout << "--> At " << MID_30 << endl;
         return false; }
-    return (this->userId.compare(patron.userId) < 0);
+    return (this->userId.compare(librarian.userId) < 0);
 }
 
-bool Patron::operator<=(const Object &obj) const 
+bool Librarian::operator<=(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_25 << endl;
+        cout << "--> At " << MID_31 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_25 << endl;
+        cout << "--> At " << MID_31 << endl;
         return false; }
-    const Patron &patron = static_cast<const Patron &>(obj);
-    if(patron.isInitialized == false) {
+    const Librarian &librarian = static_cast<const Librarian &>(obj);
+    if(librarian.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_25 << endl;
+        cout << "--> At " << MID_31 << endl;
         return false; }
-    return (this->userId.compare(patron.userId) <= 0);
+    return (this->userId.compare(librarian.userId) <= 0);
 }
 
-bool Patron::operator>(const Object &obj) const 
+bool Librarian::operator>(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_26 << endl;
+        cout << "--> At " << MID_32 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_26 << endl;
+        cout << "--> At " << MID_32 << endl;
         return false; }
-    const Patron &patron = static_cast<const Patron&>(obj);
-    if(patron.isInitialized == false) {
+    const Librarian &librarian = static_cast<const Librarian&>(obj);
+    if(librarian.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_26 << endl;
+        cout << "--> At " << MID_32 << endl;
         return false; }
-    return (this->userId.compare(patron.userId) > 0);
+    return (this->userId.compare(librarian.userId) > 0);
 }
 
-bool Patron::operator>=(const Object &obj) const 
+bool Librarian::operator>=(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_27 << endl;
+        cout << "--> At " << MID_33 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_27 << endl;
+        cout << "--> At " << MID_33 << endl;
         return false; }
-    const Patron &patron = static_cast<const Patron&>(obj);
-    if(patron.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_27 << endl;
+    const Librarian &librarian = static_cast<const Librarian&>(obj);
+    if(librarian.isInitialized == false) {
+        cout << ERROR_22 <<endl;
+        cout << "--> At " << MID_33 << endl;
         return false; }
-    return (this->userId.compare(patron.userId) >= 0);
+    return (this->userId.compare(librarian.userId) >= 0);
 }
 
-string Patron::populate(string cmd) 
+string Librarian::populate(string cmd)
 {
     userId = cmd.substr(0, cmd.find_first_of(CMD_SEPARATOR));
     string remaining = cmd.substr(cmd.find_first_of(CMD_SEPARATOR) + 1, 
@@ -179,44 +179,43 @@ string Patron::populate(string cmd)
 }
 
 // *** Getter section *** //
-string Patron::getType() const 
+string Librarian::getType() const 
 {
     return type;
 }
 
-string Patron::getUserId() const 
+string Librarian::getUserId() const 
 {
     return userId;
 }
 
-string Patron::getFirstName() const 
+string Librarian::getFirstName() const 
 {
     return firstName;
 }
 
-string Patron::getLastName() const 
+string Librarian::getLastName() const 
 {
     return lastName;
 }
 
-string Patron::getStreet() const 
+string Librarian::getStreet() const 
 {
     return street;
 }
 
-string Patron::getCity() const 
+string Librarian::getCity() const 
 {
     return city;
 }
 
-string Patron::getPhone() const 
+string Librarian::getPhone() const 
 {
     return phone;
 }
 
-string Patron::getEmail() const 
+string Librarian::getEmail() const 
 {
     return email;
 }
-
 

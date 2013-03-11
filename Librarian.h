@@ -1,6 +1,6 @@
 /******************************************************************************
-* Patron Class <Patron.h>:
-* This class is used to represent library patron's 
+* Librarian Class <Librarian.h>:
+* This class is used to represent library librarian's 
 * CSS502 - Assignment 3
 * University of Washington - Winter 2013
 * Hugo Belin Melgoza
@@ -11,15 +11,15 @@
 #include "ErrorDefinition.h"
 #include "User.h"
 
-#ifndef PATRON_H
-#define PATRON_H
-#define PATRON_TYPE "PATRON"
+#ifndef LIBRARIAN_H
+#define LIBRARIAN_H
+#define LIBRARIAN_TYPE "LIBRARIAN"
 
-class Patron : public User 
+class Librarian : public User 
 {
 public:
-    Patron();          // Default constructor
-    virtual ~Patron(); // Default destructor
+    Librarian();          // Default constructor
+    virtual ~Librarian(); // Default destructor
     // Inherited methods
     virtual Object* create() const;
     virtual bool operator==(const Object&) const;
@@ -37,8 +37,8 @@ public:
     virtual std::string getCity() const;
     virtual std::string getPhone() const;
     virtual std::string getEmail() const;
-protected:
-    // Private data members:
+private:
+    // Private data members
     bool isInitialized;
 };
 

@@ -61,6 +61,7 @@ public:
 protected:
     // Utility methods
     std::string trimString(std::string value);
+    bool testNumber(std::string number) const;
     // TODO: Add private data members
     std::string libraryName;
     UserCollection UserCollection;

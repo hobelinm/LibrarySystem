@@ -29,8 +29,17 @@ public:
     virtual bool operator>(const Object &obj) const = 0;
     virtual bool operator>=(const Object &obj) const = 0;
     // Pure virtual method to force initialization of the object
-    virtual bool populate(std::string) = 0;
-    // TODO: Add setters and getters pure virtual to force implementation
+    virtual std::string populate(std::string) = 0;
+    // Add setters and getters pure virtual to force implementation
+    virtual std::string getType() const = 0;
+    virtual std::string getUserId() const = 0;
+    virtual std::string getFirstName() const = 0;
+    virtual std::string getLastName() const = 0;
+    virtual std::string getStreet() const = 0;
+    virtual std::string getCity() const = 0;
+    virtual std::string getPhone() const = 0;
+    virtual std::string getEmail() const = 0;
+    // TODO: Implement History
 protected:
     // Protected data members
     std::string type;

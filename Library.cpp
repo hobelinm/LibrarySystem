@@ -7,7 +7,6 @@
 * Hugo Belin Melgoza
 ******************************************************************************/
 
-#include <sstream>
 #include "Library.h"
 
 using namespace std;
@@ -161,15 +160,15 @@ bool Library::parseResource(string command)
     string year(resource.substr(
         resource.find_last_of(" ") + 1, // See NOTE1
         resource.size() - resource.find_last_of(" ")));
-    int iYear;
-    char leftOver;
-    istringstream yearStream(year);
-    if(!(yearStream >> iYear) || (yearStream.get(leftOver))) {
+    int iYear = 0;
+    
+    if(!testNumber(year)) {
         cout << ERROR_2 << endl;
         cout << "--> At year <" << year << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
         cout << "----> At " << MID_1 << endl;
         return false; }
+    iYear = atoi(year.c_str());
 
     // Validate year as number > 0
     if(iYear <= 0) {
@@ -187,13 +186,13 @@ bool Library::parseResource(string command)
             string::npos);
         month = month.substr(0, month.find_first_of(" "));
         // Turn month into int
-        int iMonth;
-        istringstream monthStream(month);
-        if(!(monthStream >> iMonth) || monthStream.get(leftOver)) {
+        int iMonth = 0;
+        if(!testNumber(month)) {
             cout << ERROR_2 << endl;
             cout << "--> At month <" << month << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
             cout << "----> At " << MID_1 << endl; }
+        iMonth = atoi(month.c_str());
         
         // Validate the actual month
         if((iMonth <= 0) || (iMonth > 12)) {
@@ -250,18 +249,17 @@ bool Library::parseUser(string command)
         cout << ERROR_5 << endl;
         cout << "--> At " << MID_2 << endl;
         return false; }
-    int iUserId;
-    char leftOver;
+    int iUserId = 0;
     string sUserId(command.substr(0, command.find_first_of(CMD_SEPARATOR)));
 
     // Parse user from string
-    istringstream strUserId(sUserId);
-    if(!(strUserId >> iUserId) || strUserId.get(leftOver)) {
+    if(!testNumber(sUserId)) {
         cout << ERROR_2 << endl;
         cout << "--> At sUserId <" << sUserId << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
         cout << "----> At " << MID_2 << endl;
         return false; }
+    iUserId = atoi(sUserId.c_str());
 
     // Check 0<=integer<9999 as final validation
     if((iUserId <= USERID_MIN) || (iUserId > USERID_MAX)) {
@@ -312,4 +310,13 @@ string Library::trimString(string value)
 {
     int endVal = value.find_last_not_of(" ") + 1;
     return value.substr(0, endVal);
+}
+
+// *** Test a string for valid number conversion *** //
+bool Library::testNumber(string number) const
+{
+    for(unsigned int i = 0; i < number.size(); i++)  {
+        if((number[i] < '0') || (number[i] > '9')) {
+            return false; } } // Digit char is not within '0' - '9'
+    return true; // All digits were verified now
 }
