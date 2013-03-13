@@ -17,6 +17,7 @@
 #ifndef USER_COLLECTION_H
 #define USER_COLLECTION_H
 
+#define RESOURCE_SIZE 4
 #define USERID_MAX 9999
 #define USERID_MIN 0
 #define USER_TYPES 2 // Number of types of users
@@ -29,6 +30,7 @@ public:
     UserCollection();  // Default Constructor
     ~UserCollection(); // Default Destructor
     bool addUser(std::string cmd); // Add a new user to the system
+    User* getUser(std::string userId) const; // Retrieve user
 
 private:
     // Private Data members //

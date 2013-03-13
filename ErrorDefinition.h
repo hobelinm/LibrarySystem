@@ -35,10 +35,15 @@
 #define ERROR_22 "-> ERROR: Parameter object has not been initialized"
 #define ERROR_23 "-> ERROR: String userId cannot be null"
 #define ERROR_24 "-> ERROR: Invalid user construction string"
+#define ERROR_25 "-> ERROR: Resource has no available copies"
+#define ERROR_26 "-> ERROR: UserId was not found on checked copies for this resource"
+#define ERROR_27 "-> ERROR: Resource has no checked copies"
+#define ERROR_28 "-> ERROR: Resource is already checked out to this user ID"
 
 // Fata Errors, errors that should not occur
 #define FATAL_ERROR1 "-> FATAL ERROR: Duplicate key not caught by HashTable::Retrieve"
 #define FATAL_ERROR2 "-> FATAL ERROR: End of trie is not null"
+#define FATAL_ERROR3 "-> FATAL ERROR: Undefined HashTable type"
 
 // Method ids
 #define MID_1 "bool Library::parseResource(string command)"
@@ -82,6 +87,18 @@
 #define MID_39 "bool HashTable::operator<=(const Object &obj) const"
 #define MID_40 "bool HashTable::operator>(const Object &obj) const"
 #define MID_41 "bool HashTable::operator>=(const Object &obj) const"
+#define MID_42 "bool UserCollection::addUser(string cmd)"
+#define MID_43 "User* UserCollection::getUser(string userId) const"
+#define MID_44 "bool Fiction::operator==(const Object &obj) const"
+#define MID_45 "bool Fiction::operator!=(const Object &obj) const"
+#define MID_46 "bool Fiction::operator<(const Object &obj) const"
+#define MID_47 "bool Fiction::operator<=(const Object &obj) const"
+#define MID_48 "bool Fiction::operator>(const Object &obj) const"
+#define MID_49 "bool Fiction::operator>=(const Object &obj) const"
+#define MID_50 "string Fiction::populate(string cmd)"
+#define MID_51 "string Fiction::getKey() const"
+#define MID_52 "bool Fiction::returnResource(string userId)"
+#define MID_53 "bool Fiction::checkoutResource(string userId)"
 
 // Some notes
 #define NOTE1 "+ 1 accounts for the space following the word"

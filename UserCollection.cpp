@@ -34,7 +34,6 @@ UserCollection::~UserCollection()
 // *** Add a user to the collection *** //
 bool UserCollection::addUser(string cmd)
 {
-    // TODO: Implement addUser
     // Get the appropriate user type
     User *userType = static_cast<User *>(userFactory[userHash(cmd)]);
     // Get a new user
@@ -45,7 +44,12 @@ bool UserCollection::addUser(string cmd)
         cout << "--> At " << MID_35 << endl;
         return false; }
     // Get the proper list to insert
-    HashTable *hashTable = static_cast<HashTable *>(userList[key]);
+    HashTable *hashTable = static_cast<HashTable *>
+        (userList[userHash(key)]);
+    if(hashTable == NULL) {
+        cout << FATAL_ERROR3 << endl;
+        cout << "--> At " << MID_42 << endl;
+        return false; }
     // Add user into the user list
     hashTable->add(key, nUser);
 
@@ -64,9 +68,21 @@ string UserCollection::userHash(string userId) const
         return ""; }
 
     string userTypes[] = USERS;
-    int id = atoi(&userId[0]); // Take the first letter
+    int id = userId[0] - '0'; // Take the first letter
     if(id != 0) {
         id = 1; }
     
     return userTypes[id];
+}
+
+User* UserCollection::getUser(string userId) const
+{
+    if(userId.size() != RESOURCE_SIZE) {
+        cout << ERROR_23 << endl;
+        cout << "--> At " << MID_43 << endl;
+        return NULL; }
+    // Get the type of user:
+    HashTable *hashTable = static_cast<HashTable *>
+        (userList[userHash(userId)]);
+    return static_cast<User *>(hashTable->retrieve(userId));
 }

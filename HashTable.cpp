@@ -48,6 +48,7 @@ bool HashTable::add(std::string key, Object* value)
         root->hasChildren = false;
         root->key = key;
         root->remaining = "";
+		itemCount++;
         return true; } 
     
     Node *cursor = root;
@@ -73,6 +74,7 @@ bool HashTable::add(std::string key, Object* value)
                 cursor->children[remaining[0]]->remaining = 
                     remaining.substr(1, remaining.size() - 1);
                 cursor->hasChildren = true;
+				itemCount++;
                 return true; } }
     // Two options here:
     // 1 - remaining.size() == 0, we reached the end of the key
@@ -95,6 +97,7 @@ bool HashTable::add(std::string key, Object* value)
         cursor->hasChildren = true;
         cursor->key = key;
         cursor->remaining = remaining;
+		itemCount++;
         return true; }
     
     // 2 - cursor->hasChildren == false, we reached the end of the trie
@@ -110,6 +113,7 @@ bool HashTable::add(std::string key, Object* value)
     cursor->children[remaining[0]]->remaining = 
         remaining.substr(1, remaining.size() - 1);
     cursor->hasChildren = true;
+	itemCount++;
     return true;
 }
 

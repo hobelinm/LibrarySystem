@@ -13,6 +13,8 @@
 #include <string.h>
 #include "Object.h"
 #include "UserCollection.h"
+#include "ResourceCollection.h"
+
 #include "ErrorDefinition.h"
 
 #ifndef LIB_H
@@ -24,12 +26,6 @@
 // Number of comments
 #define ACTION_CMD_N 8
 #define ACTION_CMDS {"C", "D", "H", "R", "A", "Q", "U", "E"}
-// TODO: Move this to resource collection class
-// Number of letters used for resources
-#define RESOURCETYPE_ID_SIZE 1 
-// Supported types of resources
-#define RESOURCE_TYPES_N 5
-#define RESOURCE_TYPES {"F", "P", "Y", "V", "A"}
 
 class Library : public Object
 {
@@ -64,7 +60,8 @@ protected:
     bool testNumber(std::string number) const;
     // TODO: Add private data members
     std::string libraryName;
-    UserCollection UserCollection;
+    UserCollection userCollection;
+    ResourceCollection resourceCollection;
 };
 
 #endif

@@ -178,7 +178,7 @@ bool Library::parseResource(string command)
         cout << "----> At " << MID_1 << endl;
         return false; }
 
-    // TODO: Parse rest of the resource format
+    // Parse rest of the resource format
     // Every resource has two commas, except for Publication 'P'
     if((resourceType == "P") || (resourceType == "p")) {
         string month = resource.substr(
@@ -219,7 +219,8 @@ bool Library::parseResource(string command)
 
     // Extensibility note: Add more custom validation commands here if desired
     
-    // TODO: Call resourceCollection.Add(command);
+    // Call resourceCollection.Add(command);
+	resourceCollection.addResource(command);
 
     return true;
 }
@@ -244,7 +245,6 @@ bool Library::parseUser(ifstream &input)
 // *** Parse a custom string User command *** //
 bool Library::parseUser(string command)
 {
-    cout << command << endl; // TODO: DEBUG - Remove
     if(command == "") { 
         cout << ERROR_5 << endl;
         cout << "--> At " << MID_2 << endl;
@@ -277,7 +277,8 @@ bool Library::parseUser(string command)
         cout << "---> At " << MID_2 << endl;
         return false; }
 
-    // TODO: Call userCollection to implement the command
+    // Call userCollection to implement the command
+    userCollection.addUser(command);
     return true;
 }
 
