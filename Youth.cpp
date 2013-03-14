@@ -1,160 +1,158 @@
 /******************************************************************************
-* Fiction class <Fiction.cpp>:
+* Youth class <Youth.cpp>:
 * This class implements Fiction books
 * CSS502 - Assignment 3
 * University of Washington - Winter 2013
 * Hugo Belin Melgoza
 ******************************************************************************/
 
-#include "Fiction.h"
+#include "Youth.h"
 
 using namespace std;
-Fiction::Fiction()
+Youth::Youth()
 {
     isInitialized    = false;
-    type             = FICTION_TYPE;
+    type             = YOUTH_TYPE;
     author           = "";
     title            = "";
     year             = "";
-    availableCopies  = FICTION_COPIES;
-    for(int i = 0; i < FICTION_COPIES; i++) {
+    availableCopies  = YOUTH_COPIES;
+    for(int i = 0; i < YOUTH_COPIES; i++) {
         resourceCopies[i] = ""; }
 }
 
 // *** Destructor *** //
-Fiction::~Fiction()
+Youth::~Youth()
 {
     // TODO: Implement destructor
 }
 
 // *** Inherited method section *** //
-Object* Fiction::create() const 
+Object* Youth::create() const 
 {
-    return new Fiction;
+    return new Youth;
 }
 
-bool Fiction::operator==(const Object &obj) const 
+bool Youth::operator==(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_44 << endl;
+        cout << "--> At " << MID_56 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_44 << endl;
+        cout << "--> At " << MID_56 << endl;
         return false; }
-    const Fiction &fiction = static_cast<const Fiction &>(obj);
-    if(fiction.isInitialized == false) {
+    const Youth &youth = static_cast<const Youth &>(obj);
+    if(youth.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_44 << endl;
+        cout << "--> At " << MID_56 << endl;
         return false; }
-    // Compare by author, then by title
-    if(this->author.compare(fiction.author) == 0) {
-        return (this->title.compare(fiction.title) == 0); }
-
-    return (this->author.compare(fiction.author) == 0);
+    // Compare by title, then by author
+    if(this->title.compare(youth.title) == 0) {
+        return (this->author.compare(youth.author) == 0); }
+return (this->title.compare(youth.title) == 0);
 }
 
-bool Fiction::operator!=(const Object &obj) const 
+bool Youth::operator!=(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_45 << endl;
+        cout << "--> At " << MID_57 << endl;
         return true; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_45 << endl;
+        cout << "--> At " << MID_57 << endl;
         return true; }
     return !this->operator==(obj);
 }
 
-bool Fiction::operator<(const Object &obj) const 
+bool Youth::operator<(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_46 << endl;
+        cout << "--> At " << MID_58 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_46 << endl;
+        cout << "--> At " << MID_58 << endl;
         return false; }
-    const Fiction &fiction = static_cast<const Fiction &>(obj);
-    if(fiction.isInitialized == false) {
+    const Youth &youth = static_cast<const Youth &>(obj);
+    if(youth.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_46 << endl;
+        cout << "--> At " << MID_58 << endl;
         return false; }
-    // Compare by author, then by title
-    if(this->author.compare(fiction.author) == 0) {
-        return (this->title.compare(fiction.title) < 0); }
-    return (this->author.compare(fiction.author) < 0);
+    // Compare by title then by author
+    if(this->title.compare(youth.title) == 0) {
+        return (this->author.compare(youth.author) < 0); }
+    return (this->title.compare(youth.title) < 0);
 }
 
-bool Fiction::operator<=(const Object &obj) const 
+bool Youth::operator<=(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_47 << endl;
+        cout << "--> At " << MID_59 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_47 << endl;
+        cout << "--> At " << MID_59 << endl;
         return false; }
-    const Fiction &fiction = static_cast<const Fiction &>(obj);
-    if(fiction.isInitialized == false) {
+    const Youth &youth = static_cast<const Youth &>(obj);
+    if(youth.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_47 << endl;
+        cout << "--> At " << MID_59 << endl;
         return false; }
-    // Compare by author and then by title
-    if(this->author.compare(fiction.author) == 0) {
-        return (this->title.compare(fiction.title) <= 0); }
-    return (this->author.compare(fiction.author) <= 0);
+    // Compare by title and then by author
+    if(this->title.compare(youth.title) == 0) {
+        return (this->author.compare(youth.author) <= 0); }
+    return (this->title.compare(youth.title) <= 0);
 }
 
-bool Fiction::operator>(const Object &obj) const 
+bool Youth::operator>(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_48 << endl;
+        cout << "--> At " << MID_60 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_48 << endl;
+        cout << "--> At " << MID_60 << endl;
         return false; }
-    const Fiction &fiction = static_cast<const Fiction &>(obj);
-    if(fiction.isInitialized == false) {
+    const Youth &youth = static_cast<const Youth &>(obj);
+    if(youth.isInitialized == false) {
         cout << ERROR_22 << endl;
-        cout << "--> At " << MID_48 << endl;
+        cout << "--> At " << MID_60 << endl;
         return false; }
-    // Compare by author then by title
-    if(this->author.compare(fiction.author) == 0) {
-        return (this->title.compare(fiction.title) > 0); }
-    return (this->author.compare(fiction.author) > 0);
+    // Compare by title, then by author
+    if(this->title.compare(youth.title) == 0) {
+        return (this->author.compare(youth.author) > 0); }
+    return (this->title.compare(youth.title) > 0);
 }
 
-bool Fiction::operator>=(const Object &obj) const 
+bool Youth::operator>=(const Object &obj) const 
 {
     if(&obj == NULL) {
         cout << ERROR_14 << endl;
-        cout << "--> At " << MID_49 << endl;
+        cout << "--> At " << MID_61 << endl;
         return false; }
     if(isInitialized == false) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_49 << endl;
+        cout << "--> At " << MID_61 << endl;
         return false; }
-    const Fiction &fiction = static_cast<const Fiction &>(obj);
+    const Youth &youth = static_cast<const Youth &>(obj);
     // Test by author then by title
-    if(this->author.compare(fiction.author) == 0) {
-        return (this->title.compare(fiction.title) >= 0); }
-    return (this->author.compare(fiction.author) >= 0);
+    if(this->title.compare(youth.title) == 0) {
+        return (this->author.compare(youth.author) >= 0); }
+    return (this->title.compare(youth.title) >= 0);
 }
 
-string Fiction::populate(string cmd)
+string Youth::populate(string cmd)
 {
-    type = FICTION_TYPE;
-    if(cmd.substr(0, cmd.find_first_of(RESOURCE_SEPARATOR)) != FICTION_TYPE_ID)
-    {
+    type = YOUTH_TYPE;
+    if(cmd.substr(0, cmd.find_first_of(RESOURCE_SEPARATOR)) != YOUTH_TYPE_ID) {
         cout << ERROR_24 << endl;
-        cout << "--> At " << MID_50 << endl;
+        cout << "--> At " << MID_62 << endl;
         return ""; }
     string remaining = cmd.substr(cmd.find_first_of(RESOURCE_SEPARATOR) + 1,
         cmd.size() - cmd.find_first_of(RESOURCE_SEPARATOR) - 1);
@@ -170,53 +168,53 @@ string Fiction::populate(string cmd)
     return getKey();
 }
 
-string Fiction::getType() const 
+string Youth::getType() const 
 {
     return type;
 }
 
-string Fiction::getTitle() const 
+string Youth::getTitle() const 
 {
     return title;
 }
 
-string Fiction::getYear() const 
+string Youth::getYear() const 
 {
     return year;
 }
 
-string Fiction::getMonth() const 
+string Youth::getMonth() const 
 {
     cout << ERROR_29 << endl;
     cout << "--> At " << getKey() << endl;
-    cout << "---> At " << MID_54 << endl;
+    cout << "---> At " << MID_63 << endl;
     return ""; // Not supported
 }
 
-string Fiction::getAuthor() const 
+string Youth::getAuthor() const 
 {
     return author;
 }
 
-string Fiction::getGenre() const 
+string Youth::getGenre() const 
 {
     cout << ERROR_29 << endl;
     cout << "--> At " << getKey() << endl;
-    cout << "---> At " << MID_55 << endl;
+    cout << "---> At " << MID_64 << endl;
     return ""; // Not supported
 }
 
-bool Fiction::returnResource(string userId)
+bool Youth::returnResource(string userId)
 {
-    if(availableCopies == FICTION_COPIES) {
+    if(availableCopies == YOUTH_COPIES) {
         cout << ERROR_27 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_52 << endl;
+        cout << "----> At " << MID_65 << endl;
         return false; }
     // [Simple] Search for this userId in our array
     int userIdx = -1;
-    for(int i = 0; i < FICTION_COPIES; i++) {
+    for(int i = 0; i < YOUTH_COPIES; i++) {
         if(resourceCopies[i] == userId) {
             userIdx = i;
             break; } }
@@ -224,23 +222,23 @@ bool Fiction::returnResource(string userId)
         cout << ERROR_26 << endl;
         cout << "--> User ID: " << userId << endl;
         cout << "---> Resource: " << getKey() << endl;
-        cout << "----> At " << MID_52 << endl;
+        cout << "----> At " << MID_65 << endl;
         return false; }
     resourceCopies[userIdx] = "";
     return true;
 }
 
-bool Fiction::checkoutResource(string userId)
+bool Youth::checkoutResource(string userId)
 {
     if(availableCopies <= 0) {
         cout << ERROR_25 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_53 << endl;
+        cout << "----> At " << MID_66 << endl;
         return false; }
     // [Simple] Search for this userId in our array
     int userIdx = -1;
-    for(int i = 0; i < FICTION_COPIES; i++) {
+    for(int i = 0; i < YOUTH_COPIES; i++) {
         if(resourceCopies[i] == userId) {
             userIdx = i; // User found
             break; } }
@@ -248,26 +246,26 @@ bool Fiction::checkoutResource(string userId)
         cout << ERROR_28 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_53 << endl;
+        cout << "----> At " << MID_66 << endl;
         return false; }
-    for(int i = 0; i < FICTION_COPIES; i++) {
+    for(int i = 0; i < YOUTH_COPIES; i++) {
         if(resourceCopies[i] == "") {
             resourceCopies[i] = userId;
             break; } }
     return true;
 }
 
-string Fiction::getKey() const 
+string Youth::getKey() const 
 {
     if(!isInitialized) {
         cout << ERROR_21 << endl;
-        cout << "--> At " << MID_51 << endl; 
+        cout << "--> At " << MID_67 << endl; 
         return ""; }
     // Sort by author then by title
-     return author + "-" + title;
+     return title + "-" + author;
 }
 
-int Fiction::getAvailableCopies() const 
+int Youth::getAvailableCopies() const 
 {
     return availableCopies;
 }

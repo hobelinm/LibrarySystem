@@ -21,8 +21,7 @@ UserCollection::UserCollection()
     string userTypes[] = USERS;
     // Create the slots in the user list
     for(int i = 0; i < USER_TYPES; i++) {
-        userList.add(userTypes[i], (new HashTable));
-    }
+        userList.add(userTypes[i], (new HashTable)); }
 }
 
 // *** User Collection Destructor *** //
@@ -40,6 +39,7 @@ bool UserCollection::addUser(string cmd)
     User *nUser = static_cast<User *>(userType->create());
     string key = nUser->populate(cmd);
     if(key == "") {
+        delete nUser;
         cout << ERROR_24 << endl;
         cout << "--> At " << MID_35 << endl;
         return false; }
@@ -47,6 +47,7 @@ bool UserCollection::addUser(string cmd)
     HashTable *hashTable = static_cast<HashTable *>
         (userList[userHash(key)]);
     if(hashTable == NULL) {
+        delete nUser;
         cout << FATAL_ERROR3 << endl;
         cout << "--> At " << MID_42 << endl;
         return false; }

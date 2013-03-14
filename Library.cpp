@@ -220,8 +220,8 @@ bool Library::parseResource(string command)
     // Extensibility note: Add more custom validation commands here if desired
     
     // Call resourceCollection.Add(command);
-	resourceCollection.addResource(command);
-
+    resourceCollection.addResource(command);
+    
     return true;
 }
 
