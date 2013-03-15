@@ -172,13 +172,16 @@ string Audio::populate(string cmd)
     remaining = remaining.substr(remaining.find_first_of(RESOURCE_SEPARATOR2)
         + 2, remaining.size() - remaining.find_first_of(RESOURCE_SEPARATOR2)
         - 2);
+    isInitialized = true;
+    if(remaining.size() <= 0) {
+        return getKey(); }
     title = remaining.substr(0, remaining.find_first_of(RESOURCE_SEPARATOR2));
-    
+    if(remaining.size() <= 0) {
+        return getKey(); }
     year = remaining.substr(remaining.find_first_of(RESOURCE_SEPARATOR2)
         + 2, remaining.size() - remaining.find_first_of(RESOURCE_SEPARATOR2) 
         - 2);
 
-    isInitialized = true;
     return getKey();
 }
 
@@ -283,3 +286,37 @@ int Audio::getAvailableCopies() const
 {
     return availableCopies;
 }
+
+void Audio::print() const 
+{
+    int sizes[] = AUDIO_SIZES;
+    // Available copies
+    cout << "  " << availableCopies << "   ";
+    string output = "";
+    
+    // Title
+    string t = title;
+    if(t.size() > sizes[1]) {
+        t = t.substr(0, sizes[1] - 3);
+        t += "... "; }
+    if(t.size() < sizes[1]) {
+        for(int i = t.size(); i <= sizes[1]; i++) {
+            t += " "; } }
+    output += t;
+    
+    // Author
+    string a = genre;
+    if(a.size() > sizes[2]) {
+        a = a.substr(0, sizes[2] - 3);
+        a += "... "; }
+    if(a.size() < sizes[2]) {
+        for(int i = a.size(); i <= sizes[2]; i++) {
+            a += " "; } }
+    output += a;
+
+    // Year
+    output += year;
+
+    cout << output << endl;
+}
+

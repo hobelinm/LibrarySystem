@@ -24,8 +24,8 @@
 // Letters used for Action commands:
 #define ACTION_CMD_S 1
 // Number of comments
-#define ACTION_CMD_N 8
-#define ACTION_CMDS {"C", "D", "H", "R", "A", "Q", "U", "E"}
+#define ACTION_CMD_N 4
+#define ACTION_CMDS {"C", "D", "H", "R"}
 
 class Library : public Object
 {
@@ -58,7 +58,8 @@ protected:
     // Utility methods
     std::string trimString(std::string value);
     bool testNumber(std::string number) const;
-    // TODO: Add private data members
+    std::string fixString(std::string resource) const;
+    // Private data members
     std::string libraryName;
     UserCollection userCollection;
     ResourceCollection resourceCollection;

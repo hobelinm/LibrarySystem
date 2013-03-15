@@ -125,7 +125,6 @@ bool Library::parseResource(string command)
         cout << "----> At " << MID_1 << endl;
         return false; }
 
-    cout << command << endl; // TODO: DEBUG - Remove
     command = trimString(command); // Remove white spaces at the end if any
     // Parse Resource from string 
     string resourceType(command.substr(0, command.find_first_of(" ")));
@@ -237,7 +236,7 @@ bool Library::parseUser(ifstream &input)
 
     while(!input.eof()) {
         getline(input, command);
-        result = result && parseUser(command); }
+        result = parseUser(command) && result; }
 
     return true;
 }
@@ -290,7 +289,7 @@ bool Library::parseCommand(ifstream &input)
     
     while(!input.eof()) {
         getline(input, command);
-        result = result && parseCommand(command); }
+        result = parseCommand(command) && result; }
 
     return true;
 }
@@ -298,9 +297,60 @@ bool Library::parseCommand(ifstream &input)
 // *** Parse a custom string command *** //
 bool Library::parseCommand(string command)
 {
-    if(command == "") { return false; }
-    cout << command << endl; // TODO: DEBUG - Remove
-    // TODO: Validate action
+    if(command == "") { 
+        cout << ERROR_5 << endl;
+        cout << "--> At " << MID_105 << endl;
+        return false; }
+    
+    string cmd = command.substr(0, 1); // Get the command
+    string validCmds[] = ACTION_CMDS;
+    bool isValid = false;
+    for(int i = 0; i < ACTION_CMD_N; i++) {
+        if(cmd == validCmds[i]) {
+            isValid = true;
+            break; } }
+    if(!isValid) {
+        cout << ERROR_32 << endl;
+        cout << "--> At Command Id <" << cmd << ">" << endl;
+        cout << "---> At Command <" << command << ">" << endl;
+        cout << "----> At " << MID_105 << endl;
+        return false; }
+    
+    // Retrieve user
+    User* user = NULL;
+    Resource *resource = NULL;
+
+    if(cmd != "D") {
+        // Obtain userId
+        string remaining = command.substr(command.find_first_of(" ") + 1,
+            command.size() - command.find_first_of(" ") - 1);
+        string userId = remaining.substr(0, remaining.find_first_of(" "));
+        // Parse user from string
+        if(!testNumber(userId)) {
+            cout << ERROR_2 << endl;
+            cout << "--> At userId <" << userId << ">" << endl;
+            cout << "---> At string <" << command << ">" << endl;
+            cout << "----> At " << MID_105 << endl;
+            return false; }
+        int iUserId = atoi(userId.c_str());
+        // Check 0<=integer<9999 as final validation
+        if((iUserId <= USERID_MIN) || (iUserId > USERID_MAX)) {
+            cout << ERROR_3 << endl;
+            cout << "--> At User Id <" << iUserId << ">" << endl;
+            cout << "---> At string <" << command << ">" << endl;
+            cout << "----> At " << MID_105 << endl;
+            return false; } 
+        user = userCollection.getUser(userId);
+
+        if(cmd != "H") {
+            // Obtain resource
+            remaining = remaining.substr(remaining.find_first_of(" ") + 1,
+                remaining.size() - remaining.find_first_of(" ") - 1);
+            resource = resourceCollection.getResource(fixString(remaining)); }
+    }
+
+    // Retrieve resource
+
     // TODO: Call the appropriate object
 
     return true;
@@ -321,3 +371,90 @@ bool Library::testNumber(string number) const
             return false; } } // Digit char is not within '0' - '9'
     return true; // All digits were verified now
 }
+
+// *** Fix strings that cannot be processed directly in given order *** //
+string Library::fixString(string resource) const 
+{
+    if( resource.size() == 0) {
+        return ""; }
+
+    // Obtain the type
+    string type = resource.substr(0, resource.find_first_of(" "));
+
+    // Validate resourceType
+    bool isValidType = false;
+    string resourceTypeValues[RESOURCE_TYPES_N] = RESOURCE_TYPES;
+    for(int typeIdx = 0; typeIdx < RESOURCE_TYPES_N; typeIdx++) {
+        if(resourceTypeValues[typeIdx] == type) {
+            isValidType = true;
+            break; } }
+
+    if(!isValidType) {
+        cout << ERROR_9 << endl;
+        cout << "--> At Type <" << type << ">" << endl;
+        cout << "---> At string <" << resource << ">" << endl;
+        cout << "----> At " << MID_107 << endl;
+        return ""; }
+
+    // Although not used, check for is existence
+    unsigned found = resource.find(" H ");
+    if(found == string::npos) {
+        // There's no H for hard copy type, so an un supported value must be 
+        // here
+        cout << ERROR_34 << endl;
+        cout << "--> At resource <" << resource << ">" << endl;
+        cout << "---> At " << MID_107 << endl;
+        return ""; }
+
+    if(resource[0] == 'P') { // Fix for Periodical
+        string remaining = resource.substr(resource.find_first_of(" ") + 1,
+            resource.size() - resource.find_first_of(" ") - 1);
+        // Ignore (for now) the hard copy
+        remaining = remaining.substr(resource.find_first_of(" ") + 1,
+            resource.size() - resource.find_first_of(" ") - 1);
+        // Get the year
+        string year = remaining.substr(0, remaining.find_first_of(" "));
+        if(!testNumber(year)) {
+            cout << ERROR_2 << endl;
+            cout << "--> At year <" << year << ">" << endl;
+            cout << "---> At resource <" << resource << ">" << endl;
+            cout << "----> At " << MID_107 << endl;
+            return ""; }
+        remaining = remaining.substr(remaining.find_first_of(" ") + 1,
+            remaining.size() - remaining.find_first_of(" ") - 1);
+        // Get the month
+        string month = remaining.substr(0, remaining.find_first_of(" "));
+        if(!testNumber(month)) {
+            cout << ERROR_2 << endl;
+            cout << "--> At month <" << year << ">" << endl;
+            cout << "---> At resource <" << resource << ">" << endl;
+            cout << "----> At " << MID_107 << endl;
+            return ""; }
+        int iMonth = 0;
+        iMonth = atoi(month.c_str());// Validate the actual month
+        if((iMonth <= 0) || (iMonth > 12)) {
+            cout << ERROR_11 << endl;
+            cout << "--> At month <" << month << ">" << endl;
+            cout << "---> At resource <" << resource << ">" << endl;
+            cout << "----> At " << MID_107 << endl; 
+            return ""; }
+        remaining = remaining.substr(remaining.find_first_of(" ") + 1,
+            remaining.size() - remaining.find_first_of(" ") - 1);
+        string title = remaining.substr(0, remaining.find_first_of(","));
+        return (type + " " + title + ", " + month + " " + year); }
+    if(resource[0] == 'Y') { // Fix for Youth
+        string remaining = resource.substr(resource.find_first_of(" ") + 1,
+            resource.size() - resource.find_first_of(" ") - 1);
+        // Ignore (for now) the hard copy
+        remaining = remaining.substr(resource.find_first_of(" ") + 1,
+            resource.size() - resource.find_first_of(" ") - 1);
+        string title = remaining.substr(0, remaining.find_first_of(","));
+        remaining = remaining.substr(remaining.find_first_of(",") + 2,
+            remaining.size() - remaining.find_first_of(",") - 2);
+        string author = remaining.substr(0, remaining.find_first_of(","));
+        return (type + " " + author + ", " + title);
+    }
+
+    return resource;
+}
+

@@ -38,6 +38,7 @@ public:
     Object* remove(std::string key); // Remove item
     int size() const; // Return the number of items in the hash
     void removeAll(); // Remove all objects in the hash tables
+    virtual void print() const; // Print the items inside (trie traversal)
 private:
     struct Node {
         Node *children[TREE_SIZE];
@@ -59,6 +60,7 @@ private:
 
     // Remove helper
     void removeAllHelper(Node *cursor);
+    void printHelper(Node *cursor) const;
 };
 
 #endif

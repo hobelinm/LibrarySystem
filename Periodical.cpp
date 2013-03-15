@@ -169,16 +169,22 @@ string Periodical::populate(string cmd)
     string remaining = cmd.substr(cmd.find_first_of(RESOURCE_SEPARATOR) + 1,
         cmd.size() - cmd.find_first_of(RESOURCE_SEPARATOR) - 1);
     title = remaining.substr(0, remaining.find_first_of(RESOURCE_SEPARATOR2));
+    
+    // Suppose month is already validated
+    isInitialized = true;
+    if(remaining.size() <= 0 || (remaining.size() - 1 == title.size())) {
+        return getKey(); }
     remaining = remaining.substr(remaining.find_first_of(RESOURCE_SEPARATOR2)
         + 2, remaining.size() - remaining.find_first_of(RESOURCE_SEPARATOR2)
         - 2);
-    // Suppose month is already validated
     month = remaining.substr(0, remaining.find_first_of(RESOURCE_SEPARATOR));
+    isInitialized = true;
+    if(remaining.size() <= 0) {
+        return getKey(); }
     year = remaining.substr(remaining.find_first_of(RESOURCE_SEPARATOR)
         + 1, remaining.size() - remaining.find_first_of(RESOURCE_SEPARATOR) - 1
         );
 
-    isInitialized = true;
     return getKey();
 }
 
@@ -282,4 +288,36 @@ string Periodical::getKey() const
 int Periodical::getAvailableCopies() const 
 {
     return availableCopies;
+}
+
+void Periodical::print() const 
+{
+    unsigned sizes[] = PERIODICAL_SIZES;
+    // Available copies
+    cout << "  " << availableCopies << "   ";
+    string output = "";
+    
+    // Year
+    string y = year;
+    if(y.size() > sizes[1]) {
+        y = y.substr(0, sizes[1] - 3);
+        y += "... "; }
+    if(y.size() < sizes[1]) {
+        for(unsigned i = y.size(); i <= sizes[1]; i++) {
+            y += " "; } }
+    output += y;
+    output += " ";
+    output += month;
+    output += " ";
+    
+    // Title
+    string t = title;
+    if(t.size() > sizes[3]) {
+        t = t.substr(0, sizes[3] - 3);
+        t += "... "; }
+    if(t.size() < sizes[3]) {
+        for(unsigned i = t.size(); i <= sizes[3]; i++) {
+            t += " "; } }
+    output += t;
+    cout << output << endl;
 }

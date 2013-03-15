@@ -162,11 +162,17 @@ string Fiction::populate(string cmd)
     remaining = remaining.substr(remaining.find_first_of(RESOURCE_SEPARATOR2)
         + 2, remaining.size() - remaining.find_first_of(RESOURCE_SEPARATOR2)
         - 2);
+
+    isInitialized = true;
+    if(remaining.size() <= 0 || (remaining.size() - 1 == author.size())) {
+        return getKey(); }
     title = remaining.substr(0, remaining.find_first_of(RESOURCE_SEPARATOR2));
+    
+    if(remaining.size() <= 0 || (remaining.size() - 1 == title.size())) {
+        return getKey(); }
     year = remaining.substr(remaining.find_last_of(RESOURCE_SEPARATOR2) + 2,
         remaining.size() - remaining.find_last_of(RESOURCE_SEPARATOR2) - 2);
 
-    isInitialized = true;
     return getKey();
 }
 
@@ -271,3 +277,37 @@ int Fiction::getAvailableCopies() const
 {
     return availableCopies;
 }
+
+void Fiction::print() const 
+{
+    unsigned sizes[] = FICTION_SIZES;
+    // Available copies
+    cout << "  " << availableCopies << "   ";
+    string output = "";
+    
+    // Title
+    string t = title;
+    if(t.size() > sizes[1]) {
+        t = t.substr(0, sizes[1] - 3);
+        t += "... "; }
+    if(t.size() < sizes[1]) {
+        for(unsigned i = t.size(); i <= sizes[1]; i++) {
+            t += " "; } }
+    output += t;
+    
+    // Author
+    string a = author;
+    if(a.size() > sizes[2]) {
+        a = a.substr(0, sizes[2] - 3);
+        a += "... "; }
+    if(a.size() < sizes[2]) {
+        for(unsigned i = a.size(); i <= sizes[2]; i++) {
+            a += " "; } }
+    output += a;
+
+    // Year
+    output += year;
+
+    cout << output << endl;
+}
+

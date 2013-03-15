@@ -48,7 +48,7 @@ bool HashTable::add(std::string key, Object* value)
         root->hasChildren = false;
         root->key = key;
         root->remaining = "";
-		itemCount++;
+        itemCount++;
         return true; } 
     
     Node *cursor = root;
@@ -74,7 +74,7 @@ bool HashTable::add(std::string key, Object* value)
                 cursor->children[remaining[0]]->remaining = 
                     remaining.substr(1, remaining.size() - 1);
                 cursor->hasChildren = true;
-				itemCount++;
+                itemCount++;
                 return true; } }
     // Two options here:
     // 1 - remaining.size() == 0, we reached the end of the key
@@ -97,7 +97,7 @@ bool HashTable::add(std::string key, Object* value)
         cursor->hasChildren = true;
         cursor->key = key;
         cursor->remaining = remaining;
-		itemCount++;
+        itemCount++;
         return true; }
     
     // 2 - cursor->hasChildren == false, we reached the end of the trie
@@ -113,7 +113,7 @@ bool HashTable::add(std::string key, Object* value)
     cursor->children[remaining[0]]->remaining = 
         remaining.substr(1, remaining.size() - 1);
     cursor->hasChildren = true;
-	itemCount++;
+    itemCount++;
     return true;
 }
 
@@ -295,4 +295,24 @@ bool HashTable::operator>=(const Object &obj) const
 Object* HashTable::create() const 
 {
     return new HashTable;
+}
+
+void HashTable::print() const 
+{
+    if(root != NULL) {
+        printHelper(root);
+    }
+}
+
+void HashTable::printHelper(Node *cursor) const 
+{
+    if(cursor == NULL) { return; }
+    // Loop through all children
+    for(int i = 0; i < TREE_SIZE && cursor->hasChildren; i++) {
+        if(cursor->children[i] != NULL) {
+            printHelper(cursor->children[i]); } }
+    // Then print
+    if(cursor->key != "") {
+        cursor->data->print(); }
+    return;
 }

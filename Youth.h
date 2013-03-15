@@ -16,6 +16,9 @@
 #define YOUTH_COPIES 5
 #define RESOURCE_SEPARATOR " "
 #define RESOURCE_SEPARATOR2 ","
+#define YOUTH_HEADER1 "AVAIL TITLE                                   AUTHOR                       YEAR"
+#define YOUTH_HEADER2 "----- --------------------------------------- ---------------------------- ----"
+#define YOUTH_SIZES {5, 40, 31, 4}
 
 class Youth : public Resource
 {
@@ -43,6 +46,8 @@ public:
     // Resource functions
     virtual bool checkoutResource(std::string userId);
     virtual bool returnResource(std::string userId);
+    // Print
+    virtual void print() const;
     
 private:
     bool isInitialized;

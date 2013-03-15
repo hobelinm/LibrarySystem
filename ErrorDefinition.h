@@ -11,9 +11,9 @@
 #ifndef ERRORDEF_H
 #define ERRORDEF_H
 
-#define ERROR_1 "-> ERROR: Invalid resource identifier: "
-#define ERROR_2 "-> ERROR: String cannot be converted to integer: "
-#define ERROR_3 "-> ERROR: User Id does not comply with length requirements: "
+#define ERROR_1 "-> ERROR: Invalid resource identifier"
+#define ERROR_2 "-> ERROR: String cannot be converted to integer"
+#define ERROR_3 "-> ERROR: User Id does not comply with length requirements"
 #define ERROR_4 "-> ERROR: Input cannot be null"
 #define ERROR_5 "-> ERROR: String command cannot be empty"
 #define ERROR_6 "-> ERROR: String branchId cannot be empty"
@@ -33,7 +33,7 @@
 #define ERROR_20 "-> ERROR: Selected Library does not exist in hash table"
 #define ERROR_21 "-> ERROR: This object has not been initialized"
 #define ERROR_22 "-> ERROR: Parameter object has not been initialized"
-#define ERROR_23 "-> ERROR: String userId cannot be null"
+#define ERROR_23 "-> ERROR: String userId cannot be empty"
 #define ERROR_24 "-> ERROR: Invalid user construction string"
 #define ERROR_25 "-> ERROR: Resource has no available copies"
 #define ERROR_26 "-> ERROR: UserId was not found on checked copies for this resource"
@@ -42,6 +42,10 @@
 #define ERROR_29 "-> ERROR: Parameter is not supported in this resource"
 #define ERROR_30 "-> ERROR: Resource code is not yet implemented by hash function"
 #define ERROR_31 "-> ERROR: Invalid resource construction string"
+#define ERROR_32 "-> ERROR: Invalid action command"
+#define ERROR_33 "-> ERROR: String cannot be empty"
+#define ERROR_34 "-> ERROR: Invalid resource format, only supported Hard Copy"
+#define ERROR_35 "-> ERROR: This user does not have archived history"
 
 // Fata Errors, errors that should not occur
 #define FATAL_ERROR1 "-> FATAL ERROR: Duplicate key not caught by HashTable::Retrieve"
@@ -153,6 +157,10 @@
 #define MID_102 "bool Audio::checkoutResource(string userId)"
 #define MID_103 "string ResourceCollection::resourceHash(string resourceId) const"
 #define MID_104 "bool ResourceCollection::addResource(string resource)"
+#define MID_105 "bool Library::parseCommand(string command)"
+#define MID_106 "Resource* getResource(string resource)"
+#define MID_107 "string Library::fixString(string resource) const"
+#define MID_108 "void User::printHistory() const"
 
 // Some notes
 #define NOTE1 "+ 1 accounts for the space following the word"

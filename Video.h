@@ -17,6 +17,9 @@
 #define VIDEO_COPIES 1
 #define RESOURCE_SEPARATOR " "
 #define RESOURCE_SEPARATOR2 ","
+#define VIDEO_HEADER1 "AVAIL TITLE                                   GENRE                        YEAR"
+#define VIDEO_HEADER2 "----- --------------------------------------- ---------------------------- ----"
+#define VIDEO_SIZES {5, 40, 31, 4}
 
 class Video : public Resource
 {
@@ -44,7 +47,8 @@ public:
     // Resource functions
     virtual bool checkoutResource(std::string userId);
     virtual bool returnResource(std::string userId);
-    
+    // Print
+    virtual void print() const;
 private:
     bool isInitialized;
     std::string genre;

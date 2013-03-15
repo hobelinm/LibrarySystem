@@ -47,8 +47,8 @@ public:
     // Resource Functions
     virtual bool checkoutResource(std::string userId) = 0;
     virtual bool returnResource(std::string userId) = 0;
+    virtual void print() const = 0;
     
-    // TODO: Implement all inherited operations
 protected:
     // The only fields common to all types of resources
     std::string title;

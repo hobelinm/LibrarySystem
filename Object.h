@@ -14,6 +14,7 @@
 
 #ifndef OBJECT_H
 #define OBJECT_H
+#define PRINT_WIDTH 80 // Width of the screen
 
 class Object 
 {
@@ -27,6 +28,7 @@ public:
     virtual bool operator<=(const Object &) const = 0; // Operator <=
     virtual bool operator>(const Object &) const = 0;  // Operator >
     virtual bool operator>=(const Object &) const = 0; // Operator >=
+    virtual void print() const;                        // Print method
 };
 
 #endif

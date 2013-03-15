@@ -83,8 +83,31 @@ string ResourceCollection::resourceHash(string resourceId) const
     return resourceTypes[id];
 }
 
-Resource* getResource(string resource)
+Resource* ResourceCollection::getResource(string resource)
 {
-    return NULL;
+    if(resource.size() <= 0) {
+        cout << ERROR_33 << endl;
+        cout << "--> At " << MID_106 << endl;
+        return NULL; }
+    // Get the type of the user
+    HashTable *hashTable = static_cast<HashTable *>
+        (resourceList[resourceHash(resource)]);
+    // Get a dummy resource so we can get the key
+    Resource *resourceType = static_cast<Resource *>
+        (resourceFactory[resourceHash(resource)]);
+    Resource *nResource = static_cast<Resource *>(resourceType->create());
+    // Ignore Hard copies, for now...
+    unsigned found = resource.find(" H ");
+    string res = resource;
+    if(found != string::npos) {
+        res = resource.substr(0, resource.find_first_of(" "));
+        resource = resource.substr(resource.find_first_of(" ") + 1, 
+            resource.size() - resource.find_first_of(" ") + 1);
+        resource = resource.substr(resource.find_first_of(" ") + 1, 
+            resource.size() - resource.find_first_of(" ") + 1);
+        res = res + " " + resource; }
+    string key = nResource->populate(res);
+    delete nResource;
+    return static_cast<Resource *>(hashTable->retrieve(key));
 }
 

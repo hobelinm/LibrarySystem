@@ -7,7 +7,9 @@
 * Hugo Belin Melgoza
 ******************************************************************************/
 
+#include <iostream>
 #include "Object.h"
+using namespace std;
 
 Object::Object()
 {
@@ -17,4 +19,9 @@ Object::Object()
 Object::~Object()
 {
     // TODO: Destruct any objects here
+}
+
+void Object::print() const
+{
+    cout << "<NOT IMPLEMENTED>" << endl;
 }

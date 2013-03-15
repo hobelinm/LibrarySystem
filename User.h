@@ -14,6 +14,8 @@
 #define USER_H
 #define CMD_SEPARATOR " "
 #define ALT_SEPARATOR ","
+#define USER_OPERATIONS 2
+#define OPERATIONS {"Checkout", "Return"}
 
 class User : public Object
 {
@@ -39,7 +41,9 @@ public:
     virtual std::string getCity() const = 0;
     virtual std::string getPhone() const = 0;
     virtual std::string getEmail() const = 0;
-    // TODO: Implement History
+    // History Functions
+    virtual bool addHistory(std::string item);
+    virtual void printHistory() const;
 protected:
     // Protected data members
     std::string type;
@@ -50,6 +54,13 @@ protected:
     std::string city;
     std::string phone;
     std::string email;
+    struct Node {
+        Node *next;
+        std::string data; };
+    Node *root;
+    Node *tail;
+
+    void printNode() const;
 };
 
 #endif

@@ -8,6 +8,8 @@
 
 #include "Resource.h"
 
+using namespace std;
+
 // *** Default constructor *** //
 Resource::Resource() 
 {

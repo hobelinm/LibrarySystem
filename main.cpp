@@ -8,17 +8,16 @@
 * Hugo Belin Melgoza
 ******************************************************************************/
 
-// TODO: Remove when done
-#define _CRTDBG_MAP_ALLOC
-#define _CRTDBG_MAPALLOC 
-#include <stdlib.h>
-#include <crtdbg.h>
 #include <vld.h>
 
 #include <iostream>
 #include <string>
 #include <fstream>
 #include "LibraryManager.h"
+
+#define cmdFileName      "DataCommands.txt"
+#define userFileName     "DataPatron.txt"
+#define resourceFileName "DataBooks.txt"
 
 using namespace std;
 
@@ -29,31 +28,25 @@ int main ()
     libraries.AddBranch("Bothell Library");
     
     // Load the resource initialization
-    string resourceFile = "ResourceInitialization.txt";
+    string resourceFile = resourceFileName;
     ifstream resources(resourceFile);
-    if(!resources)
-    {
+    if(!resources) {
         cout << "Resource file could not be opened: " << resourceFile << endl;
-        return 1;
-    }
+        return 1; }
 
     // Load user initialization
-    string userFile     = "UserInitialization.txt";
+    string userFile     = userFileName;
     ifstream users(userFile);
-    if(!users)
-    {
+    if(!users) {
         cout << "User file could not be opened: " << userFile << endl;
-        return 1;
-    }
+        return 1; }
 
     // Run library commands
-    string commandFile  = "Commands.txt";
+    string commandFile  = cmdFileName;
     ifstream commands(commandFile);
-    if(!commands)
-    {
+    if(!commands) {
         cout << "Command file could not be opened: " << commandFile << endl;
-        return 1;
-    }
+        return 1; }
 
     // At this point all files could be opened, start performing operations:
     libraries.parseResource("Bothell Library", resources);
