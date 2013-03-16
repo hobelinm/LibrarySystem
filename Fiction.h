@@ -18,8 +18,8 @@
 #define RESOURCE_SEPARATOR " "
 #define RESOURCE_SEPARATOR2 ","
 #define FICTION_HEADER1 "AVAIL AUTHOR                                   TITLE                       YEAR"
-#define FICTION_HEADER2 "----- --------------------------------------- ---------------------------- ----"
-#define FICTION_SIZES {5, 31, 40, 4}
+#define FICTION_HEADER2 "----- ----------------------------------- ------------------------ ----"
+#define FICTION_SIZES {5, 27, 35, 4}
 
 class Fiction : public Resource
 {
@@ -49,6 +49,7 @@ public:
     virtual bool returnResource(std::string userId);
     // Print
     virtual void print() const;
+    virtual void printResource() const;
 private:
     bool isInitialized;
     std::string author;

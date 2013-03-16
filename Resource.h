@@ -48,6 +48,7 @@ public:
     virtual bool checkoutResource(std::string userId) = 0;
     virtual bool returnResource(std::string userId) = 0;
     virtual void print() const = 0;
+    virtual void printResource() const = 0;
     
 protected:
     // The only fields common to all types of resources
@@ -58,3 +59,4 @@ protected:
 };
 
 #endif
+

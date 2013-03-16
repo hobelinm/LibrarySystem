@@ -21,3 +21,4 @@ Resource::~Resource()
 {
     // TODO: Implement destructor methods
 }
+

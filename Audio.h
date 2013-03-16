@@ -18,8 +18,8 @@
 #define RESOURCE_SEPARATOR " "
 #define RESOURCE_SEPARATOR2 ","
 #define AUDIO_HEADER1 "AVAIL TITLE                                   GENRE                        YEAR"
-#define AUDIO_HEADER2 "----- --------------------------------------- ---------------------------- ----"
-#define AUDIO_SIZES {5, 40, 31, 4}
+#define AUDIO_HEADER2 "----- ----------------------------------- ----------------- ----"
+#define AUDIO_SIZES {5, 40 , 22, 4}
 
 class Audio : public Resource
 {
@@ -49,11 +49,13 @@ public:
     virtual bool returnResource(std::string userId);
     // Print
     virtual void print() const;
+    virtual void printResource() const;
 private:
     bool isInitialized;
     std::string genre;
-    std::string resourceCopies[AUDIO_COPIES];
+    std::string resourceCopies[AUDIO_COPIES]; 
 };
 
 #endif
+
 

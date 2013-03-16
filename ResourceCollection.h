@@ -21,6 +21,11 @@
 #define RESOURCECOLLECTION_H
 #define RESOURCECOL_TYPES 5
 #define RESOURCES {"AUDIO", "FICTION", "VIDEO", "YOUTH", "PERIODICAL"}
+#define SORTED_TYPES {"AUDIO", "FICTION", "PERIODICAL", "VIDEO", "YOUTH"}
+
+#define HEADER1 {"AVAIL TITLE                                     GENRE                 YEAR", "AVAIL AUTHOR                                   TITLE                  YEAR", "AVAIL YEAR MO TITLE", "AVAIL TITLE                                   GENRE               YEAR", "AVAIL TITLE                                   AUTHOR                  YEAR"}
+
+#define HEADER2 {"----- ----------------------------------- --------------------------- ----", "----- --------------------------- ----------------------------------- ----", "----- ---- -- --------------------------------------------------------", "----- --------------------------------------- ------------------- ----", "----- ---------------------------------- ---------------------------- ----"}
 
 class ResourceCollection
 {
@@ -29,6 +34,7 @@ public:
     ~ResourceCollection(); // Default Destructor
     bool addResource(std::string cmd); 
     Resource* getResource(std::string resource);
+    void print() const;
 private:
     // Private Data Members //
     HashTable resourceFactory;
@@ -37,3 +43,4 @@ private:
 };
 
 #endif
+

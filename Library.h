@@ -14,18 +14,12 @@
 #include "Object.h"
 #include "UserCollection.h"
 #include "ResourceCollection.h"
+#include "TransactionCollection.h"
 
 #include "ErrorDefinition.h"
 
 #ifndef LIB_H
 #define LIB_H
-// *** Definition Section ***
-// Supported types of commands
-// Letters used for Action commands:
-#define ACTION_CMD_S 1
-// Number of comments
-#define ACTION_CMD_N 4
-#define ACTION_CMDS {"C", "D", "H", "R"}
 
 class Library : public Object
 {
@@ -61,8 +55,10 @@ protected:
     std::string fixString(std::string resource) const;
     // Private data members
     std::string libraryName;
-    UserCollection userCollection;
-    ResourceCollection resourceCollection;
+    UserCollection userCollection; // Stores the users
+    ResourceCollection resourceCollection; // Stores the resources
+    TransactionCollection transactionCollection; // Stores the transactions
 };
 
 #endif
+

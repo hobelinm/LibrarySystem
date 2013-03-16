@@ -111,3 +111,26 @@ Resource* ResourceCollection::getResource(string resource)
     return static_cast<Resource *>(hashTable->retrieve(key));
 }
 
+void ResourceCollection::print() const 
+{
+    // Retrieve each sub-hashTable and print their contents
+    string types[] = SORTED_TYPES;
+    string header1[] = HEADER1;
+    string header2[] = HEADER2;
+    HashTable *resourceType = NULL;
+    for(int i = 0; i < RESOURCECOL_TYPES; i++) {
+        resourceType = static_cast<HashTable *>(resourceList[types[i]]);
+        if(resourceType == NULL) {
+            cout << endl << FATAL_ERROR3 << endl;
+            cout << "--> At " << MID_120 << endl << endl;
+            continue; }
+
+        cout << endl << " *** " << types[i] << ": ***" << endl;
+        cout << header1[i] << endl << header2[i] << endl;
+        resourceType->print();
+        cout << header2[i] << endl;
+    }
+
+    // Print header in between
+}
+

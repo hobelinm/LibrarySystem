@@ -18,7 +18,7 @@
 #define RESOURCE_SEPARATOR " "
 #define RESOURCE_SEPARATOR2 ","
 #define PERIODICAL_HEADER1 "AVAIL YEAR MO TITLE                                                            "
-#define PERIODICAL_HEADER2 "----- ---- -- -----------------------------------------------------------------"
+#define PERIODICAL_HEADER2 "----- ---- -- --------------------------------------------------------"
 #define PERIODICAL_SIZES {5, 4, 2, 69}
 
 class Periodical : public Resource
@@ -49,6 +49,7 @@ public:
     virtual bool returnResource(std::string userId);
     // Print
     virtual void print() const;
+    virtual void printResource() const;
 private:
     bool isInitialized;
     std::string month;

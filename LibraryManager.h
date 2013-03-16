@@ -16,8 +16,7 @@
 
 #ifndef  LIBMAN_H
 #define  LIBMAN_H
-// TODO: Move this define to User Collection class:
-#define USERID_MAX 9999
+//#define USERID_MAX 9999
 
 class LibraryManager 
 {
@@ -45,3 +44,4 @@ private:
 };
 
 #endif
+

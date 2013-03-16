@@ -104,8 +104,8 @@ string Library::getID() const
 bool Library::parseResource(ifstream &input)
 {
     if(input == NULL) { // Initial validation
-        cout << ERROR_4 << endl;
-        cout << "--> At " << MID_10 << endl;
+        cout << endl << ERROR_4 << endl;
+        cout << "--> At " << MID_10 << endl << endl;
         return false; } 
     bool result = true;
     string command;
@@ -121,8 +121,8 @@ bool Library::parseResource(ifstream &input)
 bool Library::parseResource(string command)
 {
     if(command == "") { 
-        cout << ERROR_5 << endl;
-        cout << "----> At " << MID_1 << endl;
+        cout << endl << endl << ERROR_5 << endl;
+        cout << "----> At " << MID_1 << endl << endl;
         return false; }
 
     command = trimString(command); // Remove white spaces at the end if any
@@ -131,10 +131,10 @@ bool Library::parseResource(string command)
     // Test for type size
     if((resourceType.size() > RESOURCETYPE_ID_SIZE) 
         || (resourceType.size() == 0)) {
-        cout << ERROR_1 << endl;
+        cout << endl << ERROR_1 << endl;
         cout << "--> At resourceType <" << resourceType << ">" << endl;
         cout << "---> At string<" << command << ">" << endl;
-        cout << "----> At " << MID_1 << endl;
+        cout << "----> At " << MID_1 << endl << endl;
         return false; }
 
     // Validate resourceType
@@ -146,10 +146,10 @@ bool Library::parseResource(string command)
             break; } }
 
     if(!isValidType) {
-        cout << ERROR_9 << endl;
+        cout << endl << ERROR_9 << endl;
         cout << "--> At resourceType <" << resourceType << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
-        cout << "----> At " << MID_1 << endl;
+        cout << "----> At " << MID_1 << endl << endl;
         return false; }
 
     // Validate Year
@@ -162,19 +162,19 @@ bool Library::parseResource(string command)
     int iYear = 0;
     
     if(!testNumber(year)) {
-        cout << ERROR_2 << endl;
+        cout << endl << ERROR_2 << endl;
         cout << "--> At year <" << year << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
-        cout << "----> At " << MID_1 << endl;
+        cout << "----> At " << MID_1 << endl << endl;
         return false; }
     iYear = atoi(year.c_str());
 
     // Validate year as number > 0
     if(iYear <= 0) {
-        cout << ERROR_10 << endl;
+        cout << endl << ERROR_10 << endl;
         cout << "--> At year <" << year << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
-        cout << "----> At " << MID_1 << endl;
+        cout << "----> At " << MID_1 << endl << endl;
         return false; }
 
     // Parse rest of the resource format
@@ -187,34 +187,34 @@ bool Library::parseResource(string command)
         // Turn month into int
         int iMonth = 0;
         if(!testNumber(month)) {
-            cout << ERROR_2 << endl;
+            cout << endl << ERROR_2 << endl;
             cout << "--> At month <" << month << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
-            cout << "----> At " << MID_1 << endl; }
+            cout << "----> At " << MID_1 << endl << endl; }
         iMonth = atoi(month.c_str());
         
         // Validate the actual month
         if((iMonth <= 0) || (iMonth > 12)) {
-            cout << ERROR_11 << endl;
+            cout << endl<< ERROR_11 << endl;
             cout << "--> At month <" << month << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
-            cout << "----> At " << MID_1 << endl; }
+            cout << "----> At " << MID_1 << endl << endl; }
 
         // Validate title not empty
         string title = trimString(resource.substr(0,
             resource.find_first_of(",")));
         if(title.size() <= 0) {
-            cout << ERROR_12 << endl;
+            cout << endl << ERROR_12 << endl;
             cout << "--> At title <" << title << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
-            cout << "----> At " << MID_1 << endl; }
+            cout << "----> At " << MID_1 << endl << endl; }
     } else { // Test for Empty Title, Author
         if((resource.find_first_of(",") == 0) ||
             (resource.find_first_of(",") == resource.find_last_of(","))) {
-            cout << ERROR_13 << endl;
+            cout << endl << ERROR_13 << endl;
             cout << "--> At resource <" << resource << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
-            cout << "----> At " << MID_1 << endl; } }
+            cout << "----> At " << MID_1 << endl << endl; } }
 
     // Extensibility note: Add more custom validation commands here if desired
     
@@ -228,8 +228,8 @@ bool Library::parseResource(string command)
 bool Library::parseUser(ifstream &input)
 {
     if(input == NULL) { 
-        cout << ERROR_4 << endl;
-        cout << "----> At " << MID_11 << endl;
+        cout << endl << ERROR_4 << endl;
+        cout << "----> At " << MID_11 << endl << endl;
         return false; }
     bool result = true;
     string command;
@@ -253,27 +253,27 @@ bool Library::parseUser(string command)
 
     // Parse user from string
     if(!testNumber(sUserId)) {
-        cout << ERROR_2 << endl;
+        cout << endl << ERROR_2 << endl;
         cout << "--> At sUserId <" << sUserId << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
-        cout << "----> At " << MID_2 << endl;
+        cout << "----> At " << MID_2 << endl << endl;
         return false; }
     iUserId = atoi(sUserId.c_str());
 
     // Check 0<=integer<9999 as final validation
     if((iUserId <= USERID_MIN) || (iUserId > USERID_MAX)) {
-        cout << ERROR_3 << endl;
+        cout << endl << ERROR_3 << endl;
         cout << "--> At User Id <" << iUserId << ">" << endl;
         cout << "---> At string <" << command << ">" << endl;
-        cout << "----> At " << MID_2 << endl;
+        cout << "----> At " << MID_2 << endl << endl;
         return false; }
 
     // The rest of the string can be considered to be OK for user name
     // Test for empty strings for first and last name
     if(0 == (command.size() - sUserId.size())) {
-        cout << ERROR_8 << endl;
+        cout << endl << ERROR_8 << endl;
         cout << "--> At string <" << command << ">" << endl;
-        cout << "---> At " << MID_2 << endl;
+        cout << "---> At " << MID_2 << endl << endl;
         return false; }
 
     // Call userCollection to implement the command
@@ -298,8 +298,8 @@ bool Library::parseCommand(ifstream &input)
 bool Library::parseCommand(string command)
 {
     if(command == "") { 
-        cout << ERROR_5 << endl;
-        cout << "--> At " << MID_105 << endl;
+        cout << endl << ERROR_5 << endl;
+        cout << "--> At " << MID_105 << endl << endl;
         return false; }
     
     string cmd = command.substr(0, 1); // Get the command
@@ -310,10 +310,10 @@ bool Library::parseCommand(string command)
             isValid = true;
             break; } }
     if(!isValid) {
-        cout << ERROR_32 << endl;
+        cout << endl << ERROR_32 << endl;
         cout << "--> At Command Id <" << cmd << ">" << endl;
         cout << "---> At Command <" << command << ">" << endl;
-        cout << "----> At " << MID_105 << endl;
+        cout << "----> At " << MID_105 << endl << endl;
         return false; }
     
     // Retrieve user
@@ -327,18 +327,18 @@ bool Library::parseCommand(string command)
         string userId = remaining.substr(0, remaining.find_first_of(" "));
         // Parse user from string
         if(!testNumber(userId)) {
-            cout << ERROR_2 << endl;
+            cout << endl << ERROR_2 << endl;
             cout << "--> At userId <" << userId << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
-            cout << "----> At " << MID_105 << endl;
+            cout << "----> At " << MID_105 << endl << endl;
             return false; }
         int iUserId = atoi(userId.c_str());
         // Check 0<=integer<9999 as final validation
         if((iUserId <= USERID_MIN) || (iUserId > USERID_MAX)) {
-            cout << ERROR_3 << endl;
+            cout << endl << ERROR_3 << endl;
             cout << "--> At User Id <" << iUserId << ">" << endl;
             cout << "---> At string <" << command << ">" << endl;
-            cout << "----> At " << MID_105 << endl;
+            cout << "----> At " << MID_105 << endl << endl;
             return false; } 
         user = userCollection.getUser(userId);
 
@@ -346,12 +346,12 @@ bool Library::parseCommand(string command)
             // Obtain resource
             remaining = remaining.substr(remaining.find_first_of(" ") + 1,
                 remaining.size() - remaining.find_first_of(" ") - 1);
-            resource = resourceCollection.getResource(fixString(remaining)); }
+            string temp = fixString(remaining);
+            if(temp.size() > 0) {
+                resource = resourceCollection.getResource(temp); } }
     }
 
-    // Retrieve resource
-
-    // TODO: Call the appropriate object
+    transactionCollection.Execute(command, user, resource, &resourceCollection);
 
     return true;
 }
@@ -359,7 +359,10 @@ bool Library::parseCommand(string command)
 // *** Trim spaces at the end if any *** //
 string Library::trimString(string value)
 {
+    // Trim trailing whitespace
     int endVal = value.find_last_not_of(" ") + 1;
+    value = value.substr(0, endVal);
+    endVal = value.find_last_of("\t\n");
     return value.substr(0, endVal);
 }
 
@@ -390,10 +393,10 @@ string Library::fixString(string resource) const
             break; } }
 
     if(!isValidType) {
-        cout << ERROR_9 << endl;
+        cout << endl << ERROR_9 << endl;
         cout << "--> At Type <" << type << ">" << endl;
         cout << "---> At string <" << resource << ">" << endl;
-        cout << "----> At " << MID_107 << endl;
+        cout << "----> At " << MID_107 << endl << endl;
         return ""; }
 
     // Although not used, check for is existence
@@ -401,9 +404,9 @@ string Library::fixString(string resource) const
     if(found == string::npos) {
         // There's no H for hard copy type, so an un supported value must be 
         // here
-        cout << ERROR_34 << endl;
+        cout << endl << ERROR_34 << endl;
         cout << "--> At resource <" << resource << ">" << endl;
-        cout << "---> At " << MID_107 << endl;
+        cout << "---> At " << MID_107 << endl << endl;
         return ""; }
 
     if(resource[0] == 'P') { // Fix for Periodical
@@ -415,28 +418,28 @@ string Library::fixString(string resource) const
         // Get the year
         string year = remaining.substr(0, remaining.find_first_of(" "));
         if(!testNumber(year)) {
-            cout << ERROR_2 << endl;
+            cout << endl << ERROR_2 << endl;
             cout << "--> At year <" << year << ">" << endl;
             cout << "---> At resource <" << resource << ">" << endl;
-            cout << "----> At " << MID_107 << endl;
+            cout << "----> At " << MID_107 << endl << endl;
             return ""; }
         remaining = remaining.substr(remaining.find_first_of(" ") + 1,
             remaining.size() - remaining.find_first_of(" ") - 1);
         // Get the month
         string month = remaining.substr(0, remaining.find_first_of(" "));
         if(!testNumber(month)) {
-            cout << ERROR_2 << endl;
+            cout << endl << ERROR_2 << endl;
             cout << "--> At month <" << year << ">" << endl;
             cout << "---> At resource <" << resource << ">" << endl;
-            cout << "----> At " << MID_107 << endl;
+            cout << "----> At " << MID_107 << endl << endl;
             return ""; }
         int iMonth = 0;
         iMonth = atoi(month.c_str());// Validate the actual month
         if((iMonth <= 0) || (iMonth > 12)) {
-            cout << ERROR_11 << endl;
+            cout << endl << ERROR_11 << endl;
             cout << "--> At month <" << month << ">" << endl;
             cout << "---> At resource <" << resource << ">" << endl;
-            cout << "----> At " << MID_107 << endl; 
+            cout << "----> At " << MID_107 << endl << endl; 
             return ""; }
         remaining = remaining.substr(remaining.find_first_of(" ") + 1,
             remaining.size() - remaining.find_first_of(" ") - 1);

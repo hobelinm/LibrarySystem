@@ -25,3 +25,4 @@ void Object::print() const
 {
     cout << "<NOT IMPLEMENTED>" << endl;
 }
+

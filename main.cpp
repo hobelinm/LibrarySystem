@@ -10,6 +10,7 @@
 
 #include <vld.h>
 
+#include <stdlib.h>
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -28,24 +29,21 @@ int main ()
     libraries.AddBranch("Bothell Library");
     
     // Load the resource initialization
-    string resourceFile = resourceFileName;
-    ifstream resources(resourceFile);
+    ifstream resources(resourceFileName);
     if(!resources) {
-        cout << "Resource file could not be opened: " << resourceFile << endl;
+        cout << "Resource file could not be opened: " << resourceFileName << endl;
         return 1; }
 
     // Load user initialization
-    string userFile     = userFileName;
-    ifstream users(userFile);
+    ifstream users(userFileName);
     if(!users) {
-        cout << "User file could not be opened: " << userFile << endl;
+        cout << "User file could not be opened: " << userFileName << endl;
         return 1; }
 
     // Run library commands
-    string commandFile  = cmdFileName;
-    ifstream commands(commandFile);
+    ifstream commands(cmdFileName);
     if(!commands) {
-        cout << "Command file could not be opened: " << commandFile << endl;
+        cout << "Command file could not be opened: " << cmdFileName << endl;
         return 1; }
 
     // At this point all files could be opened, start performing operations:
@@ -60,3 +58,4 @@ int main ()
 
     return 0;
 }
+

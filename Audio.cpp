@@ -36,17 +36,17 @@ Object* Audio::create() const
 bool Audio::operator==(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_92 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_92 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_92 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_92 << endl << endl;
         return false; }
     const Audio &audio = static_cast<const Audio &>(obj);
     if(audio.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_92 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_92 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(audio.genre) == 0) {
@@ -60,11 +60,11 @@ bool Audio::operator==(const Object &obj) const
 bool Audio::operator!=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_93 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_93 << endl << endl;
         return true; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
+        cout << endl<< ERROR_21 << endl;
         cout << "--> At " << MID_93 << endl;
         return true; }
     return !this->operator==(obj);
@@ -73,17 +73,17 @@ bool Audio::operator!=(const Object &obj) const
 bool Audio::operator<(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_94 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_94 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_94 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_94 << endl << endl;
         return false; }
     const Audio &audio = static_cast<const Audio &>(obj);
     if(audio.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_94 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_94 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(audio.genre) == 0) {
@@ -96,17 +96,17 @@ bool Audio::operator<(const Object &obj) const
 bool Audio::operator<=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_95 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_95 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_95 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_95 << endl << endl;
         return false; }
     const Audio &audio = static_cast<const Audio &>(obj);
     if(audio.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_95 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_95 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(audio.genre) == 0) {
@@ -119,17 +119,17 @@ bool Audio::operator<=(const Object &obj) const
 bool Audio::operator>(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_96 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_96 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_96 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_96 << endl << endl;
         return false; }
     const Audio &audio = static_cast<const Audio &>(obj);
     if(audio.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_96 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_96 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(audio.genre) == 0) {
@@ -142,12 +142,12 @@ bool Audio::operator>(const Object &obj) const
 bool Audio::operator>=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_97 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_97 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_97 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_97 << endl << endl;
         return false; }
     const Audio &audio = static_cast<const Audio &>(obj);
     // Compare by genre, then by year, then by title
@@ -163,8 +163,8 @@ string Audio::populate(string cmd)
     type = AUDIO_TYPE;
     if(cmd.substr(0, cmd.find_first_of(RESOURCE_SEPARATOR)) 
         != AUDIO_TYPE_ID) {
-        cout << ERROR_24 << endl;
-        cout << "--> At " << MID_98 << endl;
+        cout << endl << ERROR_24 << endl;
+        cout << "--> At " << MID_98 << endl << endl;
         return ""; }
     string remaining = cmd.substr(cmd.find_first_of(RESOURCE_SEPARATOR) + 1,
         cmd.size() - cmd.find_first_of(RESOURCE_SEPARATOR) - 1);
@@ -202,17 +202,17 @@ string Audio::getYear() const
 
 string Audio::getMonth() const 
 {
-    cout << ERROR_29 << endl;
+    cout << endl << ERROR_29 << endl;
     cout << "--> At " << getKey() << endl;
-    cout << "---> At " << MID_99 << endl;
+    cout << "---> At " << MID_99 << endl << endl;
     return ""; // Parameter is not supported
 }
 
 string Audio::getAuthor() const 
 {
-    cout << ERROR_29 << endl;
+    cout << endl << ERROR_29 << endl;
     cout << "--> At " << getKey() << endl;
-    cout << "---> At " << MID_100 << endl;
+    cout << "---> At " << MID_100 << endl << endl;
     return ""; // Parameter is not supported
 }
 
@@ -224,10 +224,10 @@ string Audio::getGenre() const
 bool Audio::returnResource(string userId)
 {
     if(availableCopies == AUDIO_COPIES) {
-        cout << ERROR_27 << endl;
+        cout << endl << ERROR_27 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_101 << endl;
+        cout << "----> At " << MID_101 << endl << endl;
         return false; }
     // [Simple] Search for this userId in our array
     int userIdx = -1;
@@ -236,22 +236,23 @@ bool Audio::returnResource(string userId)
             userIdx = i;
             break; } }
     if(userIdx == -1) {
-        cout << ERROR_26 << endl;
+        cout << endl << ERROR_26 << endl;
         cout << "--> User ID: " << userId << endl;
         cout << "---> Resource: " << getKey() << endl;
-        cout << "----> At " << MID_101 << endl;
+        cout << "----> At " << MID_101 << endl << endl;
         return false; }
     resourceCopies[userIdx] = "";
+    availableCopies++;
     return true;
 }
 
 bool Audio::checkoutResource(string userId)
 {
     if(availableCopies <= 0) {
-        cout << ERROR_25 << endl;
+        cout << endl << ERROR_25 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_102 << endl;
+        cout << "----> At " << MID_102 << endl << endl;
         return false; }
     // [Simple] Search for this userId in our array
     int userIdx = -1;
@@ -260,14 +261,15 @@ bool Audio::checkoutResource(string userId)
             userIdx = i; // User found
             break; } }
     if(userIdx != -1) {
-        cout << ERROR_28 << endl;
+        cout << endl << ERROR_28 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_102 << endl;
+        cout << "----> At " << MID_102 << endl << endl;
         return false; }
     for(int i = 0; i < AUDIO_COPIES; i++) {
         if(resourceCopies[i] == "") {
             resourceCopies[i] = userId;
+            availableCopies--;
             break; } }
     return true;
 }
@@ -275,8 +277,8 @@ bool Audio::checkoutResource(string userId)
 string Audio::getKey() const 
 {
     if(!isInitialized) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_91 << endl; 
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_91 << endl << endl; 
         return ""; }
     // Sort by genre, then by year, then by title
      return genre + "-" + year + "-" + title;
@@ -289,7 +291,7 @@ int Audio::getAvailableCopies() const
 
 void Audio::print() const 
 {
-    int sizes[] = AUDIO_SIZES;
+    unsigned sizes[] = AUDIO_SIZES;
     // Available copies
     cout << "  " << availableCopies << "   ";
     string output = "";
@@ -300,7 +302,7 @@ void Audio::print() const
         t = t.substr(0, sizes[1] - 3);
         t += "... "; }
     if(t.size() < sizes[1]) {
-        for(int i = t.size(); i <= sizes[1]; i++) {
+        for(unsigned i = t.size(); i <= sizes[1]; i++) {
             t += " "; } }
     output += t;
     
@@ -310,13 +312,44 @@ void Audio::print() const
         a = a.substr(0, sizes[2] - 3);
         a += "... "; }
     if(a.size() < sizes[2]) {
-        for(int i = a.size(); i <= sizes[2]; i++) {
+        for(unsigned i = a.size(); i <= sizes[2]; i++) {
             a += " "; } }
     output += a;
-
+    
     // Year
     output += year;
+    
+    cout << output << endl;
+}
 
+void Audio::printResource() const
+{
+    unsigned sizes[] = AUDIO_SIZES;
+    string output = "";
+    
+    // Title
+    string t = title;
+    if(t.size() > sizes[1]) {
+        t = t.substr(0, sizes[1] - 3);
+        t += "... "; }
+    if(t.size() < sizes[1]) {
+        for(unsigned i = t.size(); i <= sizes[1]; i++) {
+            t += " "; } }
+    output += t;
+    
+    // Author
+    string a = genre;
+    if(a.size() > sizes[2]) {
+        a = a.substr(0, sizes[2] - 3);
+        a += "... "; }
+    if(a.size() < sizes[2]) {
+        for(unsigned i = a.size(); i <= sizes[2]; i++) {
+            a += " "; } }
+    output += a;
+    
+    // Year
+    output += year;
+    
     cout << output << endl;
 }
 
