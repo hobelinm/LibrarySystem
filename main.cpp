@@ -16,9 +16,9 @@
 #include <fstream>
 #include "LibraryManager.h"
 
-#define cmdFileName      "DataCommands.txt"
-#define userFileName     "DataPatron.txt"
-#define resourceFileName "DataBooks.txt"
+#define cmdFileName      "data3commands.txt"
+#define userFileName     "data3patrons.txt"
+#define resourceFileName "data3books.txt"
 
 using namespace std;
 

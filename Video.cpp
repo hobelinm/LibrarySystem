@@ -36,17 +36,17 @@ Object* Video::create() const
 bool Video::operator==(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_80 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_80 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_80 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_80 << endl << endl;
         return false; }
     const Video &video = static_cast<const Video &>(obj);
     if(video.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_80 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_80 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(video.genre) == 0) {
@@ -60,12 +60,12 @@ bool Video::operator==(const Object &obj) const
 bool Video::operator!=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_81 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_81 << endl << endl;
         return true; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_81 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_81 << endl << endl;
         return true; }
     return !this->operator==(obj);
 }
@@ -73,17 +73,17 @@ bool Video::operator!=(const Object &obj) const
 bool Video::operator<(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_82 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_82 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_82 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_82 << endl << endl;
         return false; }
     const Video &video = static_cast<const Video &>(obj);
     if(video.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_82 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_82 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(video.genre) == 0) {
@@ -96,17 +96,17 @@ bool Video::operator<(const Object &obj) const
 bool Video::operator<=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_83 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_83 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_83 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_83 << endl << endl;
         return false; }
     const Video &video = static_cast<const Video &>(obj);
     if(video.isInitialized == false) {
-        cout << ERROR_22 << endl;
-        cout << "--> At " << MID_83 << endl;
+        cout << endl << ERROR_22 << endl;
+        cout << "--> At " << MID_83 << endl << endl;
         return false; }
     // Compare by genre, then by year, then by title
     if(this->genre.compare(video.genre) == 0) {
@@ -119,12 +119,12 @@ bool Video::operator<=(const Object &obj) const
 bool Video::operator>(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_84 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_84 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_84 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_84 << endl << endl;
         return false; }
     const Video &video = static_cast<const Video &>(obj);
     if(video.isInitialized == false) {
@@ -142,12 +142,12 @@ bool Video::operator>(const Object &obj) const
 bool Video::operator>=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_85 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_85 << endl << endl;
         return false; }
     if(isInitialized == false) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_85 << endl;
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_85 << endl << endl;
         return false; }
     const Video &video = static_cast<const Video &>(obj);
     // Compare by genre, then by year, then by title
@@ -246,6 +246,7 @@ bool Video::returnResource(string userId)
         cout << "----> At " << MID_89 << endl;
         return false; }
     resourceCopies[userIdx] = "";
+    availableCopies++;
     return true;
 }
 
@@ -272,6 +273,7 @@ bool Video::checkoutResource(string userId)
     for(int i = 0; i < VIDEO_COPIES; i++) {
         if(resourceCopies[i] == "") {
             resourceCopies[i] = userId;
+            availableCopies--;
             break; } }
     return true;
 }
@@ -323,3 +325,36 @@ void Video::print() const
 
     cout << output << endl;
 }
+
+void Video::printResource() const 
+{
+    unsigned sizes[] = VIDEO_SIZES;
+    // Available copies
+    string output = "";
+    
+    // Title
+    string t = title;
+    if(t.size() > sizes[1]) {
+        t = t.substr(0, sizes[1] - 3);
+        t += "... "; }
+    if(t.size() < sizes[1]) {
+        for(unsigned i = t.size(); i <= sizes[1]; i++) {
+            t += " "; } }
+    output += t;
+    
+    // Author
+    string a = genre;
+    if(a.size() > sizes[2]) {
+        a = a.substr(0, sizes[2] - 3);
+        a += "... "; }
+    if(a.size() < sizes[2]) {
+        for(unsigned i = a.size(); i <= sizes[2]; i++) {
+            a += " "; } }
+    output += a;
+
+    // Year
+    output += year;
+
+    cout << output << endl;
+}
+

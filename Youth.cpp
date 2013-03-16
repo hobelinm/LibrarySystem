@@ -189,9 +189,9 @@ string Youth::getYear() const
 
 string Youth::getMonth() const 
 {
-    cout << ERROR_29 << endl;
+    cout << endl << ERROR_29 << endl;
     cout << "--> At " << getKey() << endl;
-    cout << "---> At " << MID_63 << endl;
+    cout << "---> At " << MID_63 << endl << endl;
     return ""; // Not supported
 }
 
@@ -202,19 +202,19 @@ string Youth::getAuthor() const
 
 string Youth::getGenre() const 
 {
-    cout << ERROR_29 << endl;
+    cout << endl << ERROR_29 << endl;
     cout << "--> At " << getKey() << endl;
-    cout << "---> At " << MID_64 << endl;
+    cout << "---> At " << MID_64 << endl << endl;
     return ""; // Not supported
 }
 
 bool Youth::returnResource(string userId)
 {
     if(availableCopies == YOUTH_COPIES) {
-        cout << ERROR_27 << endl;
+        cout << endl << ERROR_27 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_65 << endl;
+        cout << "----> At " << MID_65 << endl << endl;
         return false; }
     // [Simple] Search for this userId in our array
     int userIdx = -1;
@@ -223,22 +223,23 @@ bool Youth::returnResource(string userId)
             userIdx = i;
             break; } }
     if(userIdx == -1) {
-        cout << ERROR_26 << endl;
+        cout << endl << ERROR_26 << endl;
         cout << "--> User ID: " << userId << endl;
         cout << "---> Resource: " << getKey() << endl;
-        cout << "----> At " << MID_65 << endl;
+        cout << "----> At " << MID_65 << endl << endl;
         return false; }
     resourceCopies[userIdx] = "";
+    availableCopies++;
     return true;
 }
 
 bool Youth::checkoutResource(string userId)
 {
     if(availableCopies <= 0) {
-        cout << ERROR_25 << endl;
+        cout << endl << ERROR_25 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_66 << endl;
+        cout << "----> At " << MID_66 << endl << endl;
         return false; }
     // [Simple] Search for this userId in our array
     int userIdx = -1;
@@ -247,14 +248,15 @@ bool Youth::checkoutResource(string userId)
             userIdx = i; // User found
             break; } }
     if(userIdx != -1) {
-        cout << ERROR_28 << endl;
+        cout << endl << ERROR_28 << endl;
         cout << "--> User ID <" << userId << ">" << endl;
         cout << "---> Resource <" << getKey() << ">" << endl;
-        cout << "----> At " << MID_66 << endl;
+        cout << "----> At " << MID_66 << endl << endl;
         return false; }
     for(int i = 0; i < YOUTH_COPIES; i++) {
         if(resourceCopies[i] == "") {
             resourceCopies[i] = userId;
+            availableCopies--;
             break; } }
     return true;
 }
@@ -262,8 +264,8 @@ bool Youth::checkoutResource(string userId)
 string Youth::getKey() const 
 {
     if(!isInitialized) {
-        cout << ERROR_21 << endl;
-        cout << "--> At " << MID_67 << endl; 
+        cout << endl << ERROR_21 << endl;
+        cout << "--> At " << MID_67 << endl << endl; 
         return ""; }
     // Sort by author then by title
      return title + "-" + author;
@@ -306,3 +308,36 @@ void Youth::print() const
 
     cout << output << endl;
 }
+
+void Youth::printResource() const 
+{
+    unsigned sizes[] = YOUTH_SIZES;
+    // Available copies
+    string output = "";
+    
+    // Title
+    string t = title;
+    if(t.size() > sizes[1]) {
+        t = t.substr(0, sizes[1] - 3);
+        t += "... "; }
+    if(t.size() < sizes[1]) {
+        for(unsigned i = t.size(); i <= sizes[1]; i++) {
+            t += " "; } }
+    output += t;
+    
+    // Author
+    string a = author;
+    if(a.size() > sizes[2]) {
+        a = a.substr(0, sizes[2] - 3);
+        a += "... "; }
+    if(a.size() < sizes[2]) {
+        for(unsigned i = a.size(); i <= sizes[2]; i++) {
+            a += " "; } }
+    output += a;
+
+    // Year
+    output += year;
+
+    cout << output << endl;
+}
+

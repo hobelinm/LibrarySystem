@@ -87,3 +87,4 @@ User* UserCollection::getUser(string userId) const
         (userList[userHash(userId)]);
     return static_cast<User *>(hashTable->retrieve(userId));
 }
+

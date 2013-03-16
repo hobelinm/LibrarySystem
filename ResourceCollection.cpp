@@ -124,13 +124,11 @@ void ResourceCollection::print() const
             cout << endl << FATAL_ERROR3 << endl;
             cout << "--> At " << MID_120 << endl << endl;
             continue; }
-
+        // Print header in between
         cout << endl << " *** " << types[i] << ": ***" << endl;
         cout << header1[i] << endl << header2[i] << endl;
         resourceType->print();
         cout << header2[i] << endl;
     }
-
-    // Print header in between
 }
 

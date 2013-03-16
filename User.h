@@ -8,6 +8,7 @@
 
 #include <string>
 #include "Object.h"
+#include "Resource.h"
 #include "ErrorDefinition.h"
 
 #ifndef USER_H
@@ -42,7 +43,7 @@ public:
     virtual std::string getPhone() const = 0;
     virtual std::string getEmail() const = 0;
     // History Functions
-    virtual bool addHistory(std::string item);
+    virtual bool addHistory(std::string op, Resource *item);
     virtual void printHistory() const;
 protected:
     // Protected data members
@@ -56,7 +57,8 @@ protected:
     std::string email;
     struct Node {
         Node *next;
-        std::string data; };
+        std::string op;
+        Resource *data; };
     Node *root;
     Node *tail;
 
@@ -64,3 +66,4 @@ protected:
 };
 
 #endif
+

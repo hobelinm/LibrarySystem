@@ -17,8 +17,8 @@
 #define RESOURCE_SEPARATOR " "
 #define RESOURCE_SEPARATOR2 ","
 #define YOUTH_HEADER1 "AVAIL TITLE                                   AUTHOR                       YEAR"
-#define YOUTH_HEADER2 "----- --------------------------------------- ---------------------------- ----"
-#define YOUTH_SIZES {5, 40, 31, 4}
+#define YOUTH_HEADER2 "----- ---------------------------------- ------------------------ ----"
+#define YOUTH_SIZES {5, 35, 27, 4}
 
 class Youth : public Resource
 {
@@ -48,7 +48,7 @@ public:
     virtual bool returnResource(std::string userId);
     // Print
     virtual void print() const;
-    
+    virtual void printResource() const;
 private:
     bool isInitialized;
     std::string author;

@@ -249,6 +249,7 @@ bool Library::parseUser(string command)
         cout << "--> At " << MID_2 << endl;
         return false; }
     int iUserId = 0;
+    command = trimString(command);
     string sUserId(command.substr(0, command.find_first_of(CMD_SEPARATOR)));
 
     // Parse user from string
@@ -301,7 +302,7 @@ bool Library::parseCommand(string command)
         cout << endl << ERROR_5 << endl;
         cout << "--> At " << MID_105 << endl << endl;
         return false; }
-    
+    command = trimString(command);
     string cmd = command.substr(0, 1); // Get the command
     string validCmds[] = ACTION_CMDS;
     bool isValid = false;
@@ -362,14 +363,21 @@ string Library::trimString(string value)
     // Trim trailing whitespace
     int endVal = value.find_last_not_of(" ") + 1;
     value = value.substr(0, endVal);
-    endVal = value.find_last_of("\t\n");
-    return value.substr(0, endVal);
+    endVal = value.find_last_of("\n");
+    if(endVal != string::npos) {
+        value = value.substr(0, endVal); }
+    endVal = value.find_last_of(13);
+    if(endVal != string::npos) {
+        value = value.substr(0, endVal); }
+
+    return value;
 }
 
 // *** Test a string for valid number conversion *** //
 bool Library::testNumber(string number) const
 {
     for(unsigned int i = 0; i < number.size(); i++)  {
+        if((int)number[i] == 13) { continue; }
         if((number[i] < '0') || (number[i] > '9')) {
             return false; } } // Digit char is not within '0' - '9'
     return true; // All digits were verified now
@@ -402,7 +410,7 @@ string Library::fixString(string resource) const
     // Although not used, check for is existence
     unsigned found = resource.find(" H ");
     if(found == string::npos) {
-        // There's no H for hard copy type, so an un supported value must be 
+        // There's no H for hard copy type, so a supported value must be 
         // here
         cout << endl << ERROR_34 << endl;
         cout << "--> At resource <" << resource << ">" << endl;

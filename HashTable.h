@@ -51,7 +51,7 @@ private:
                 children[i] = NULL; } }
         ~Node() { 
             for(int i = 0; i < TREE_SIZE && hasChildren; i++) {
-                delete children[i]; }
+                    delete children[i]; }
         }
     };
 
@@ -61,6 +61,7 @@ private:
     // Remove helper
     void removeAllHelper(Node *cursor);
     void printHelper(Node *cursor) const;
+    bool isS1Less(std::string s1, std::string s2) const;
 };
 
 #endif

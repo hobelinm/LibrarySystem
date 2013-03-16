@@ -178,6 +178,8 @@ string Periodical::populate(string cmd)
         + 2, remaining.size() - remaining.find_first_of(RESOURCE_SEPARATOR2)
         - 2);
     month = remaining.substr(0, remaining.find_first_of(RESOURCE_SEPARATOR));
+    if(month.size() == 1) {
+        month += " "; }
     isInitialized = true;
     if(remaining.size() <= 0) {
         return getKey(); }

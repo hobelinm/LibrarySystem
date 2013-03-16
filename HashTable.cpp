@@ -29,25 +29,31 @@ HashTable::~HashTable()
 bool HashTable::add(std::string key, Object* value)
 {
     if(key == "") {
-        cout << ERROR_16 << endl;
-        cout << "--> At " << MID_21 << endl; 
+        cout << endl << ERROR_16 << endl;
+        cout << "--> At " << MID_21 << endl << endl; 
         return false; }
     if(value == NULL) {
-        cout << ERROR_17 << endl;
-        cout << "--> At " << MID_21 << endl;
+        cout << endl << ERROR_17 << endl;
+        cout << "--> At " << MID_21 << endl << endl;
         return false; }
     if(retrieve(key) != NULL) { // Item already exists in HashTable
-        cout << ERROR_18 << endl;
-        cout << "--> At " << MID_21 << endl;
+        cout << endl << ERROR_18 << endl;
+        cout << "--> Key <" << key << ">" << endl;
+        cout << "---> At " << MID_21 << endl << endl;
         return false; }
 
     // Check if we have any item stored
     if(root == NULL) {
         root = new Node;
-        root->data = value;
-        root->hasChildren = false;
-        root->key = key;
+        root->hasChildren = true;
+        root->key = "";
         root->remaining = "";
+        root->data = NULL;
+        root->children[key[0]] = new Node;
+        root->children[key[0]]->data = value;
+        root->children[key[0]]->hasChildren = false;
+        root->children[key[0]]->key = key;
+        root->children[key[0]]->remaining = key.substr(1, key.size() - 1);
         itemCount++;
         return true; } 
     
@@ -63,9 +69,9 @@ bool HashTable::add(std::string key, Object* value)
                 // We found a place to put our key,value pair
                 // Test for existence of the same key here:
                 if(cursor->key == key) {
-                    cout << FATAL_ERROR1 << endl;
+                    cout << endl << FATAL_ERROR1 << endl;
                     cout << "--> At Key <" << key << ">" << endl;
-                    cout << "---> At " << MID_21 << endl;
+                    cout << "---> At " << MID_21 << endl << endl;
                     return false; }
                 cursor->children[remaining[0]] = new Node;
                 cursor->children[remaining[0]]->data = value;
@@ -81,9 +87,9 @@ bool HashTable::add(std::string key, Object* value)
     if(remaining.size() == 0) {
         // Check remaining to see if we can insert here
         if(cursor->remaining == "") {
-            cout << FATAL_ERROR1 << endl;
+            cout << endl << FATAL_ERROR1 << endl;
             cout << "--> At Key <" << key << ">" << endl;
-            cout << "---> At " << MID_21 << endl;
+            cout << "---> At " << MID_21 << endl << endl;
             return false; }
         // move currently stored data down one level
         cursor->children[cursor->remaining[0]] = new Node;
@@ -102,9 +108,9 @@ bool HashTable::add(std::string key, Object* value)
     
     // 2 - cursor->hasChildren == false, we reached the end of the trie
     if(cursor->children[remaining[0]] != NULL) {
-        cout << FATAL_ERROR2 << endl;
+        cout << endl << FATAL_ERROR2 << endl;
         cout << "--> At key <" << key << ">" << endl;
-        cout << "---> At " << MID_21 << endl;
+        cout << "---> At " << MID_21 << endl << endl;
         return false; }
     cursor->children[remaining[0]] = new Node;
     cursor->children[remaining[0]]->data = value;
@@ -121,8 +127,8 @@ bool HashTable::add(std::string key, Object* value)
 Object* HashTable::retrieve(string key) const 
 {
     if(key == "") { // No empty strings allowed
-        cout << ERROR_16 << endl;
-        cout << "--> At " << MID_19 << endl;
+        cout << endl << ERROR_16 << endl;
+        cout << "--> At " << MID_19 << endl << endl;
         return NULL; }
     if(root == NULL) {
     //    cout << ERROR_19 << endl;
@@ -132,7 +138,7 @@ Object* HashTable::retrieve(string key) const
     string remainder = key;
     Node *cursor = root;
     while(cursor != NULL
-        && (cursor->key != key)
+        && (cursor->key.compare(key) != 0)
         && (remainder.size() > 0)) {
         cursor = cursor->children[remainder[0]];
         remainder = remainder.substr(1, remainder.size() - 1); }
@@ -148,8 +154,8 @@ Object* HashTable::retrieve(string key) const
 Object* HashTable::operator[](string key) const 
 {
     if(key == "") { // No empty strings allowed
-        cout << ERROR_16 << endl;
-        cout << "--> At " << MID_18 << endl;
+        cout << endl << ERROR_16 << endl;
+        cout << "--> At " << MID_18 << endl << endl;
         return NULL; }
     return retrieve(key);
 }
@@ -157,11 +163,6 @@ Object* HashTable::operator[](string key) const
 // *** Remove an item from hash table *** //
 Object* HashTable::remove(string key)
 {
-    if(key == "") {
-        cout << ERROR_16 << endl;
-        cout << "--> At " << MID_20 << endl;
-        return NULL; }
-    
     if(root == NULL) {
         return NULL; }
 
@@ -236,8 +237,8 @@ void HashTable::removeAllHelper(Node *cursor)
 bool HashTable::operator==(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_36 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_36 << endl << endl;
         return false; }
     const HashTable &hashTable = static_cast<const HashTable &>(obj);
     return (this->itemCount == hashTable.itemCount);
@@ -246,8 +247,8 @@ bool HashTable::operator==(const Object &obj) const
 bool HashTable::operator!=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_37 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_37 << endl << endl;
         return true; }
     return !this->operator==(obj);
 }
@@ -255,8 +256,8 @@ bool HashTable::operator!=(const Object &obj) const
 bool HashTable::operator<(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_38 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_38 << endl << endl;
         return false; }
     const HashTable &hashTable = static_cast<const HashTable &>(obj);
     return (this->itemCount < hashTable.itemCount);
@@ -265,8 +266,8 @@ bool HashTable::operator<(const Object &obj) const
 bool HashTable::operator<=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_39 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_39 << endl << endl;
         return false; }
     const HashTable &hashTable = static_cast<const HashTable &>(obj);
     return (this->itemCount <= hashTable.itemCount);
@@ -275,8 +276,8 @@ bool HashTable::operator<=(const Object &obj) const
 bool HashTable::operator>(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_40 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_40 << endl << endl;
         return false; }
     const HashTable &hashTable = static_cast<const HashTable &>(obj);
     return (this->itemCount > hashTable.itemCount);
@@ -285,8 +286,8 @@ bool HashTable::operator>(const Object &obj) const
 bool HashTable::operator>=(const Object &obj) const 
 {
     if(&obj == NULL) {
-        cout << ERROR_14 << endl;
-        cout << "--> At " << MID_41 << endl;
+        cout << endl << ERROR_14 << endl;
+        cout << "--> At " << MID_41 << endl << endl;
         return false; }
     const HashTable &hashTable = static_cast<const HashTable &>(obj);
     return (this->itemCount >= hashTable.itemCount);
@@ -300,19 +301,38 @@ Object* HashTable::create() const
 void HashTable::print() const 
 {
     if(root != NULL) {
-        printHelper(root);
-    }
+        printHelper(root); }
 }
 
 void HashTable::printHelper(Node *cursor) const 
 {
     if(cursor == NULL) { return; }
+    bool isPrint = false;
+    
+    if(cursor->remaining == "" && cursor->data != NULL) {
+        cursor->data->print(); 
+        isPrint = true; }
     // Loop through all children
     for(int i = 0; i < TREE_SIZE && cursor->hasChildren; i++) {
-        if(cursor->children[i] != NULL) {
-            printHelper(cursor->children[i]); } }
+        if(cursor->children[i] == NULL ) {continue; }
+        if(!isPrint && cursor->remaining.size() > 1
+            && i >= cursor->remaining[1] &&
+            isS1Less(cursor->key, cursor->children[i]->key)) {
+            cursor->data->print();
+            isPrint = true; }
+        printHelper(cursor->children[i]); }
     // Then print
-    if(cursor->key != "") {
+    if(cursor->key != "" && !isPrint) {
         cursor->data->print(); }
     return;
+}
+
+bool HashTable::isS1Less(string s1, string s2) const 
+{
+    bool less = true;
+    for(unsigned int i = 0; i < s1.size() && i < s2.size(); i++) {
+        if(s2[i] > s1[i] && s2[i] != ' ') {
+            less = false;
+            break; } }
+    return less;
 }
